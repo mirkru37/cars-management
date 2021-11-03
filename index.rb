@@ -117,11 +117,16 @@ def search_menu(car_list)
   puts "Results:"
   puts
   print_hash_list(search_res)
+  menu($template_main, 'Input option: ', car_list)
 end
 
 def get_option(message = '')
   print(message)
-  gets.chomp
+  opt = gets
+  if gets.nil?
+    opt = ''
+  end
+  opt.chomp
 end
 
 def menu(template, message = '', *args)
