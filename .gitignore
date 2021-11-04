@@ -39,8 +39,6 @@ build-iPhoneSimulator/
 /rdoc/
 
 ## Environment normalization:
-/.vscode/
-/.idea/
 /.bundle/
 /vendor/bundle
 /lib/bundler/man/
