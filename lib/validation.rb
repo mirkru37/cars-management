@@ -1,7 +1,11 @@
 require 'date'
 
 class Validation
+  # @param [Integer] max_year
+  # @param [Integer] min_year
+  # @return [Integer]
   def self.year(value, max_year: DateTime.now.year, min_year: 1800)
+    return value if value.to_s.strip.empty?
     raise TypeError, "Argument #{value} is not a int" unless int?(value)
 
     value = value.to_i
@@ -12,7 +16,11 @@ class Validation
     value
   end
 
+  # @param [Float] max_price
+  # @param [Float] min_price
+  # @return [Float]
   def self.price(value, max_price: Float::MAX, min_price: 0)
+    return value if value.to_s.strip.empty?
     raise TypeError, "Argument #{value} is not a number" unless number?(value)
 
     value = value.to_f.round(2)
