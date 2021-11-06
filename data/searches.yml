@@ -1,0 +1,37 @@
+---
+- statistic:
+    Total quantity: 1
+    Request quantity: 5
+    rules:
+      make: ford
+  result:
+  - id: 7073efd8-330f-11ec-8d3d-0242ac130003
+    make: Ford
+    model: Focus
+    year: 2017
+    odometer: 103000
+    price: 19000
+    description: Like new
+    date_added: 24/08/21
+- statistic:
+    Total quantity: 2
+    Request quantity: 1
+    rules:
+      make: audi
+  result:
+  - id: 7935e180-330f-11ec-8d3d-0242ac130003
+    make: Audi
+    model: Q7
+    year: 2012
+    odometer: 180000
+    price: 22800
+    description: Audi q7 3.0 tdi climate control cruise control
+    date_added: 24/08/21
+  - id: 693f8416-330f-11ec-8d3d-0242ac130003
+    make: Audi
+    model: A4
+    year: 2012
+    odometer: 103000
+    price: 12500
+    description: Audi a4 quattro premium 2012
+    date_added: 21/08/21
