@@ -1,10 +1,10 @@
 
 class Input
   # @param [Array<String>] names
-  # @param [Array<Method>] validation
+  # @param [Array<Array<Method | Hash{Symbol->Integer} | nil>>] validation
   # @param [String] message
   # @return [Hash]
-  def self.param(names, validation = [], message = 'Please input:')
+  def self.param(names, validation = [], message: 'Please input:')
     if !validation.empty? && validation.length != names.length
       raise IndexError, "Mismatch of 'names' and 'validation' sizes"
     end
@@ -15,7 +15,7 @@ class Input
       print "\t Input #{name}: "
       begin
         value = gets.chomp # valid here
-        value = validation[i].call(value) unless validation[i].nil?
+        value = validation[i][0].call(value, **validation[i][1]) unless validation[i].nil?
       rescue TypeError => e
         puts e
         redo
