@@ -59,7 +59,3 @@ res.each do |item|
   Output.puts_hash(item)
   puts
 end
-
-
-
-
