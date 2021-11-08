@@ -1,7 +1,7 @@
 # Description
 To run application, open terminal in folder with index.rb and run it
 
-# Intalation
+# Instalation
 ```bash
 git clone https://github.com/mirkru37/cars-management.git
 ```
