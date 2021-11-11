@@ -4,7 +4,7 @@ require './lib/output'
 require './lib/validation'
 require 'yaml'
 
-DATABASE = YAML.safe_load(File.open('data/cars.yml')).to_a
+DATABASE = YAML.safe_load(File.open('db/db.yml')).to_a
 RULES_NAMES = %w[make model year_from year_to price_from price_to].freeze
 RULES_VALIDATION = [nil, nil, [Validation.method(:year), {}], [Validation.method(:year), {}],
                     [Validation.method(:price), {}], [Validation.method(:price), {}]].freeze
