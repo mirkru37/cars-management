@@ -20,13 +20,13 @@ If you want **to skip** one, leave an **empty** field.
 
 **Rules marked with * require valid input data**
 
-###Table of validation
+### Table of validation
 | Field  | Required value |
 | ------------- | ------------- |
 | year_(from/to)  | integer between 1800 and today's year  |
 | price_(from/to)  | float under zero (**notice** that value will be rounded to two decimal places) |
 
-###Rules
+### Rules
 - make - takes one car brand you want to search
   >Input make: _Ford_
   >
@@ -56,11 +56,11 @@ Also if you input **wrong** option, the **default** one will be chosen.
 
 **Default** sorting is by **date_added** and **desc**
 
-###Example
+### Example
 
 ![Home Page](screenshots/usage_cast.gif)
 ___
-####Input
+#### Input
 ```
 Please input search rules(to skip one press enter)
 	 Input make: 
@@ -75,7 +75,7 @@ Please input sort order (asc | desc) default: desc
 asc
 Chosen sort_by: price sort_order: asc
 ```
-####Result
+#### Result
 ```
 id: 8841f970-330f-11ec-8d3d-0242ac130003
 make: Renault
@@ -105,7 +105,7 @@ description: Like new
 date_added: 24/08/21
 ```
 ___
-####Input
+#### Input
 ```
 Please input search rules(to skip one press enter)
 	 Input make: ford
@@ -126,7 +126,7 @@ Please input sort order (asc | desc) default: desc
 
 Chosen sort_by: date_added sort_order: desc
 ```
-####Output
+#### Output
 ```
 id: 1ec46226-330f-11ec-8d3d-0242ac130003
 make: Ford
