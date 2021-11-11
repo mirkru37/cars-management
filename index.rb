@@ -12,7 +12,7 @@ SORT_BY = %w[price date_added].freeze
 SORT_ORDER = %w[asc desc].freeze
 
 rules = Input.param(RULES_NAMES, RULES_VALIDATION, message: 'Please input search rules(to skip one press enter)')
-rules.delete_if do |key, value|
+rules.delete_if do |_key, value|
   value.to_s.strip.empty?
 end
 res = Search.filter_hash_by_rules(DATABASE, rules)

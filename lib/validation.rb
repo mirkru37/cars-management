@@ -33,7 +33,7 @@ class Validation
 
   def self.number?(val)
     Float(val)
-  rescue TypeError
+  rescue ArgumentError
     false
 
   end
