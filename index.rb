@@ -1,21 +1,25 @@
 require './lib/search'
+require './lib/rules'
 require './lib/input'
 require './lib/output'
-require './lib/validation'
+require './lib/database'
 require 'yaml'
 
-DATABASE = YAML.safe_load(File.open('db/db.yml')).to_a
-RULES_NAMES = %w[make model year_from year_to price_from price_to].freeze
-RULES_VALIDATION = [nil, nil, [Validation.method(:year), {}], [Validation.method(:year), {}],
-                    [Validation.method(:price), {}], [Validation.method(:price), {}]].freeze
+
+database = Database.new('db/db.yml', editable: false)
+rules = [SearchRule.new('make'), SearchRule.new('model'),
+         SearchRule.year('year_from'), SearchRule.year('year_to'),
+         SearchRule.price('price_from'), SearchRule.price('price_to')]
+
+CARS = database.load.freeze
 SORT_BY = %w[price date_added].freeze
 SORT_ORDER = %w[asc desc].freeze
 
-rules = Input.param(RULES_NAMES, RULES_VALIDATION, message: 'Please input search rules(to skip one press enter)')
-rules.delete_if do |_key, value|
-  value.to_s.strip.empty?
+Input.param(rules, message: 'Please input search rules(to skip one press enter)')
+rules.delete_if do |rule|
+  rule.value.to_s.strip.empty?
 end
-res = Search.filter_hash_by_rules(DATABASE, rules)
+res = Search.filter_hash_by_rules(CARS, rules)
 sort_by = Input.option(SORT_BY, default: 'date_added', message: 'Please input sort option')
 sort_order = Input.option(SORT_ORDER, default: 'desc', message: 'Please input sort order')
 puts "Chosen sort_by: #{sort_by} sort_order: #{sort_order}"

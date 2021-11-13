@@ -25,14 +25,14 @@ class Search
   end
 
   # @param [Array<Hash>] data
-  # @param [Hash] rules
+  # @param [Array<SearchRule>] rules
   # @return [Array<Hash>]
   def self.filter_hash_by_rules(data, rules)
     res = data
-    rules.each_pair do |key, value|
+    rules.each do |rule|
       break if res.empty?
 
-      res = filter_hash_by_key(res, key, value)
+      res = filter_hash_by_key(res, rule.name, rule.value)
     end
     res
   end
