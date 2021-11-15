@@ -1,7 +1,8 @@
 require './lib/rules'
 require './lib/input'
 require './lib/database'
-require './lib/car_advertisement'
+require './lib/car'
+require './lib/car_collection'
 require 'yaml'
 
 
@@ -9,7 +10,7 @@ database = Database.new('db/db.yml', editable: false)
 rules = [SearchRule.new('make'), SearchRule.new('model'),
          SearchRule.year('year_from'), SearchRule.year('year_to'),
          SearchRule.price('price_from'), SearchRule.price('price_to')]
-cars = CarAdvCollection.hash_arr(database.load.freeze)
+cars = CarCollection.hash_arr(database.load.freeze)
 
 SORT_BY = %w[price date_added].freeze
 SORT_ORDER = %w[asc desc].freeze
