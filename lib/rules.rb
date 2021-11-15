@@ -3,19 +3,6 @@ require './lib/validation'
 require './lib/inputable'
 
 class SearchRule < Inputable
-  # @param [String] name
-  # @param [Method] validation_method
-  # @param [Hash] validation_parameters
-  def initialize(name, validation_method: nil, validation_parameters: {})
-    @validation_method = validation_method
-    @validation_parameters = validation_parameters
-    super(name)
-  end
-
-  # @param [String] new_val
-  def value=(new_val)
-    super @validation_method.nil? ? new_val : @validation_method.call(new_val, **@validation_parameters)
-  end
 
   # @param [String] name
   # @param [Integer] max_year
@@ -33,5 +20,19 @@ class SearchRule < Inputable
     SearchRule.new(name,
                    validation_method: Validation.method(:price),
                    validation_parameters: { max_price: max_price, min_price: min_price })
+  end
+
+  # @param [String] name
+  # @param [Method] validation_method
+  # @param [Hash] validation_parameters
+  def initialize(name, validation_method: nil, validation_parameters: {})
+    @validation_method = validation_method
+    @validation_parameters = validation_parameters
+    super(name)
+  end
+
+  # @param [String] new_val
+  def value=(new_val)
+    super @validation_method.nil? ? new_val : @validation_method.call(new_val, **@validation_parameters)
   end
 end

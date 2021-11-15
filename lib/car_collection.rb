@@ -2,6 +2,13 @@ require 'date'
 
 class CarCollection
 
+  # @param [Array<Hash>, Array<Car>] array
+  def self.arr(array)
+    cls = CarCollection.new
+    cls.append(array)
+    cls
+  end
+
   def initialize
     @adv = []
   end
@@ -77,7 +84,7 @@ class CarCollection
         adv.fit_rule?(rule)
       end
     end
-    CarCollection.hash_adv(res)
+    CarCollection.arr(res)
   end
 
   # @param [String] sort_by
@@ -89,7 +96,7 @@ class CarCollection
       car.instance_variable_get("@#{sort_by}")
     end
     res.reverse! if sort_order == 'desc'
-    CarCollection.hash_adv(res)
+    CarCollection.arr(res)
   end
 
   # @param [String] sort_by
@@ -105,19 +112,5 @@ class CarCollection
   # @param [Car, Hash, Array<Hash>, Array<Car>]
   def <<(data)
     append(data)
-  end
-
-  # @param [Array<Hash>] array
-  def self.hash_arr(array)
-    cls = CarCollection.new
-    cls.append(array)
-    cls
-  end
-
-  # @param [Array<Car>] array
-  def self.hash_adv(array)
-    cls = CarCollection.new
-    cls.append(array)
-    cls
   end
 end

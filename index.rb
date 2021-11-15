@@ -10,7 +10,7 @@ database = Database.new('db/db.yml', editable: false)
 rules = [SearchRule.new('make'), SearchRule.new('model'),
          SearchRule.year('year_from'), SearchRule.year('year_to'),
          SearchRule.price('price_from'), SearchRule.price('price_to')]
-cars = CarCollection.hash_arr(database.load.freeze)
+cars = CarCollection.arr(database.load.freeze)
 
 SORT_BY = %w[price date_added].freeze
 SORT_ORDER = %w[asc desc].freeze
