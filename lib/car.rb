@@ -13,7 +13,6 @@ class Car
   # @param [String] description
   # @param [DateTime, String] date_added
   def initialize(id, make, model, year, odometer, price, description, date_added)
-
     @id = id
     @make = make
     @model = model

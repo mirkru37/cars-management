@@ -2,115 +2,99 @@ require 'date'
 
 class CarCollection
 
-  # @param [Array<Hash>, Array<Car>] array
-  def self.arr(array)
-    cls = CarCollection.new
-    cls.append(array)
-    cls
-  end
-
-  def initialize
-    @adv = []
+  # @param [Array<Hash>]
+  def initialize(all_cars = [])
+    @all_cars = []
+    append(all_cars) if all_cars
   end
 
   # @param [String] id
   def id?(id)
-    @adv.any? { |adv| adv.id.casecmp?(id) }
+    @all_cars.any? { |car| car.id.casecmp?(id) }
   end
 
-  # @param [Car] data
-  def append_adv(data)
-    if id?(data.id)
-      raise ArgumentError, "There already is object with id #{data.id}"
-    else
-      @adv << data
+  # @param [Car] car
+  def append_cars(car)
+    raise ArgumentError, "There already is object with id #{car.id}" if id?(car.id)
+
+    @all_cars << car
+  end
+
+  # @param [Hash] car
+  def append_hash(car)
+    raise ArgumentError, "There already is object with id #{car.id}" if id?(car[:id])
+
+    @all_cars << Car.new(*car.values)
+  end
+
+  # @param [Array<Hash>] cars
+  def append_array_hash(cars)
+    cars.each do |car|
+      append_hash(car)
     end
   end
 
-  # @param [Hash] data
-  def append_hash(data)
-    if id?(data[:id])
-      raise ArgumentError, "There already is object with id #{data.id}"
+  # @param [Array<Car>] cars
+  def append_array_adv(cars)
+    @all_cars += cars
+  end
+
+  # @param [Array<Hash>, Array<Car>] cars
+  def append_array(cars)
+    if cars.all? { |obj| obj.instance_of?(Hash) }
+      append_array_hash(cars)
+    elsif cars.all? { |obj| obj.instance_of?(Car) }
+      append_array_adv(cars)
     else
-      @adv << Car.new(*data.values)
-    end
-  end
-
-  # @param [Array<Hash>] data
-  def append_array_hash(data)
-    data.each do |hash|
-      append_hash(hash)
-    end
-  end
-
-  # @param [Array<Car>] data
-  def append_array_adv(data)
-    @adv += data
-  end
-
-  # @param [Array<Hash>, Array<Car>] data
-  def append_array(data)
-    if data.all? { |obj| obj.instance_of?(Hash) }
-      append_array_hash(data)
-    elsif data.all? { |obj| obj.instance_of?(Car) }
-      append_array_adv(data)
-    else
-      puts data.inspect
+      puts cars.inspect
       raise ArgumentError, 'Invalid array members!'
     end
   end
 
   # @param [Car, Hash, Array<Hash>, Array<CarAdv>]
-  def append(data)
-    if data.instance_of?(Car)
-      append_adv(data)
-    elsif data.instance_of?(Hash)
-      append_hash(data)
-    elsif data.instance_of?(Array)
-      append_array(data)
+  def append(cars)
+    if cars.instance_of?(Car)
+      append_cars(cars)
+    elsif cars.instance_of?(Hash)
+      append_hash(cars)
+    elsif cars.instance_of?(Array)
+      append_array(cars)
     else
       raise ArgumentError, 'Invalid argument!'
     end
   end
 
   # @param [Array<SearchRule>]
-  # @return [CarCollection]
+  # @return [Array<Car>]
   def filter_by_rules(rules)
-    res = @adv.clone
+    res = @all_cars.clone
     rules.each do |rule|
       break if res.empty?
 
-      res.filter! do |adv|
-        adv.fit_rule?(rule)
+      res.filter! do |car|
+        car.fit_rule?(rule)
       end
     end
-    CarCollection.arr(res)
+    res
   end
 
   # @param [String] sort_by
   # @param [String] sort_order
-  # @return [CarCollection]
+  # @return [Array<Car>]
   def sort(sort_by: 'date_added', sort_order: 'desc')
-    res = @adv.clone
+    res = @all_cars.clone
     res.sort_by! do |car|
       car.instance_variable_get("@#{sort_by}")
     end
-    res.reverse! if sort_order == 'desc'
-    CarCollection.arr(res)
-  end
-
-  # @param [String] sort_by
-  # @param [String] sort_order
-  def sort!(sort_by: 'date_added', sort_order: 'desc')
-    @adv = sort(sort_by: sort_by, sort_order: sort_order).all
+    sort_order == 'desc' ? res.reverse! : res
   end
 
   def all
-    @adv
+    @all_cars
   end
 
-  # @param [Car, Hash, Array<Hash>, Array<Car>]
-  def <<(data)
-    append(data)
+  # @param [Car, Hash, Array<Hash>, Array<Car>] cars
+  def <<(cars)
+    append(cars)
   end
 end
