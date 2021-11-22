@@ -35,7 +35,7 @@ class CarCollection
   end
 
   # @param [Array<Car>] cars
-  def append_array_adv(cars)
+  def append_array_car(cars)
     @all_cars += cars
   end
 
@@ -44,9 +44,8 @@ class CarCollection
     if cars.all? { |obj| obj.instance_of?(Hash) }
       append_array_hash(cars)
     elsif cars.all? { |obj| obj.instance_of?(Car) }
-      append_array_adv(cars)
+      append_array_car(cars)
     else
-      puts cars.inspect
       raise ArgumentError, 'Invalid array members!'
     end
   end

@@ -1,8 +1,11 @@
+require './lib/hashify'
+
 class Car
+  include Hashify
 
   DATE_FORMAT = '%d/%m/%y'.freeze
 
-  attr_reader :id, :make, :model, :year, :odometer, :price, :description, :date_added
+  attr_reader :id, :make, :model, :year, :odometer, :price, :description
 
   # @param [String] id
   # @param [String] make
@@ -21,6 +24,10 @@ class Car
     @price = price.to_f
     @description = description
     @date_added = date_added.instance_of?(String) ? DateTime.strptime(date_added, DATE_FORMAT) : date_added
+  end
+
+  def date_added
+    @date_added.strftime(DATE_FORMAT)
   end
 
   def to_s

@@ -1,8 +1,10 @@
 require 'date'
 require './lib/validation'
 require './lib/inputable'
+require './lib/hashify'
 
 class SearchRule < Inputable
+  include Hashify
 
   # @param [String] name
   # @param [Integer] max_year
@@ -34,5 +36,10 @@ class SearchRule < Inputable
   # @param [String] new_val
   def value=(new_val)
     super @validation_method.nil? ? new_val : @validation_method.call(new_val, **@validation_parameters)
+  end
+
+  # override from Hashify to ignore specific fields
+  def ivars_excluded_from_hash
+    %w[@validation_method @validation_parameters]
   end
 end
