@@ -20,6 +20,8 @@ If you want **to skip** one, leave an **empty** field.
 
 **Rules marked with * require valid input data**
 
+**Statistic** is stored in *data/searches.yml*
+
 ### Table of validation
 | Field  | Required value |
 | ------------- | ------------- |
@@ -56,6 +58,63 @@ Also if you input **wrong** option, the **default** one will be chosen.
 
 **Default** sorting is by **date_added** and **desc**
 
+### searches.yml
+```yaml
+---
+  - total_quantity: 2
+    request_quantity: 6
+    rules:
+      - name: make
+        value: ford
+    result:
+      - id: 1ec46226-330f-11ec-8d3d-0242ac130003
+        make: Ford
+        model: Fusion
+        year: 2017
+        odometer: 65000
+        price: 18000.0
+        description: Selling a good car
+        date_added: 18/09/21
+      - id: 7073efd8-330f-11ec-8d3d-0242ac130003
+        make: Ford
+        model: Focus
+        year: 2017
+        odometer: 103000
+        price: 19000.0
+        description: Like new
+        date_added: 24/08/21
+  - total_quantity: 0
+    request_quantity: 3
+    rules:
+      - name: make
+        value: volvo
+    result: []
+  - total_quantity: 1
+    request_quantity: 1
+    rules:
+      - name: make
+        value: ford
+      - name: model
+        value: focus
+      - name: year_from
+        value: 2010
+      - name: year_to
+        value: 2021
+      - name: price_from
+        value: 0.0
+      - name: price_to
+        value: 20000.0
+    result:
+      - id: 7073efd8-330f-11ec-8d3d-0242ac130003
+        make: Ford
+        model: Focus
+        year: 2017
+        odometer: 103000
+        price: 19000.0
+        description: Like new
+        date_added: 24/08/21
+```
+
 ### Example
 
 ![Home Page](screenshots/usage_cast.gif)
@@ -75,8 +134,16 @@ Please input sort order (asc | desc) default: desc
 asc
 Chosen sort_by: price sort_order: asc
 ```
-#### Result
+#### Output
 ```
+Statistic:
+
+	Total quantity: 3
+
+	Request quantity: 1
+
+Result:
+
 id: 8841f970-330f-11ec-8d3d-0242ac130003
 make: Renault
 model: Megane
@@ -128,6 +195,14 @@ Chosen sort_by: date_added sort_order: desc
 ```
 #### Output
 ```
+Statistic:
+
+	Total quantity: 2
+
+	Request quantity: 4
+
+Result:
+
 id: 1ec46226-330f-11ec-8d3d-0242ac130003
 make: Ford
 model: Fusion
