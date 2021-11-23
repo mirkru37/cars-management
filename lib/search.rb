@@ -15,17 +15,20 @@ class Search
     @rules = rules
     @result = result
   end
-
-  # @param [Search] other
+  
+  # @param [Array<Hash>, Array<SearchRule>] other
   # @return [TrueClass, FalseClass]
-  def eql?(other)
-    @total_quantity.eql?(other.total_quantity) && @request_quantity.eql?(other.request_quantity) && @rules.eql?(rules)
-  end
+  def equal_rules?(other)
+    return other.empty? if @rules.empty?
+    return false if other.length != @rules.length
 
-  # @param [Hash, Search] other
-  # @return [TrueClass, FalseClass]
-  def equal?(other)
-    other = Search.new(*other.values) if other.is_a?(Hash)
-    eql?(other)
+    @rules.all? do |rule|
+      i = other.index do |other_rule|
+        other_rule.to_hash['name'].casecmp(rule.to_hash['name'])
+      end
+      return false if i.nil?
+
+      other[i].to_hash['value'] == rule.to_hash['value']
+    end
   end
 end

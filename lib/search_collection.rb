@@ -65,14 +65,14 @@ class SearchCollection
   # @return [TrueClass, FalseClass]
   def include?(value)
     @searches.any? do |search|
-      search.equal?(value)
+      search.equal_rules?(value.rules)
     end
   end
 
   # @param [Search] other
   def index(other)
     @searches.index do |search|
-      search.eql?(other)
+      search.equal_rules?(other.rules)
     end
   end
 
@@ -83,5 +83,11 @@ class SearchCollection
   # @param [Integer] idn
   def [](idn)
     @searches[idn]
+  end
+
+  # @param [Integer] idn
+  # @param [Search] val
+  def []=(idn, val)
+    @searches[idn] = val
   end
 end

@@ -31,12 +31,15 @@ res = filtered.sort(sort_by: sort_by, sort_order: sort_order)
 search = Search.new(res.length, 1, rules, res)
 if searches.include?(search)
   i = searches.index(search)
-  searches[i].request_quantity += 1
+  search.request_quantity = searches[i].request_quantity + 1
+  searches[i] = search
 else
   searches << search
 end
 searches_database.dump(searches.to_hash['searches'])
-p searches.to_hash
+puts 'Statistic:', '',
+     "\tTotal quantity: #{search.total_quantity}", '',
+     "\tRequest quantity: #{search.request_quantity}", ''
 
 puts 'Result:', ''
 res.each do |item|
