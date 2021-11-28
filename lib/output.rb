@@ -8,11 +8,16 @@ class Output
   # @param [Search] search
   def self.search_statistic(search)
     table = Terminal::Table.new title: 'Statistic'
-    table.style = { width: @search_result_table_width, border_bottom: false }
+    set_search_table_style(table)
     table << ['Total quantity', search.total_quantity]
     table << ['Request quantity', search.request_quantity]
     table.align_column(1, :right)
     puts table
+  end
+
+  # @param [Terminal::Table] table
+  def self.set_search_table_style(table)
+    table.style = { width: @search_result_table_width, border_bottom: false, border_x: '=', border_i: 'x'}
   end
 
   # @param [Array<Car>] result
@@ -20,8 +25,7 @@ class Output
     table = Terminal::Table.new
     table.title = 'Result'
     table.headings = %w[Field Information]
-    table.style = { width: @search_result_table_width }
-    table.align_column(1, :right)
+    set_search_table_style(table)
     result.each do |item|
       item.attributes.each do |key, value|
         table << [key, value]
