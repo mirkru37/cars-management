@@ -8,10 +8,13 @@ class Output
 
   # @param [Search] search
   def self.search_statistic(search)
-    table = Terminal::Table.new title: 'Statistic'.colorize(color: :light_green).bold
+    table = Terminal::Table.new title:
+                                  I18n.t('tittles.statistic').colorize(color: :light_green).bold
     set_search_table_style(table)
-    table << ['Total quantity'.colorize(:green), search.total_quantity.to_s.colorize(:green).italic]
-    table << ['Request quantity'.colorize(:green), search.request_quantity.to_s.colorize(:green).italic]
+    table << [I18n.t('attributes.total_quantity').colorize(:green),
+              search.total_quantity.to_s.colorize(:green).italic]
+    table << [I18n.t('attributes.request_quantity').colorize(:green),
+              search.request_quantity.to_s.colorize(:green).italic]
     table.align_column(1, :right)
     puts table
   end
@@ -24,12 +27,13 @@ class Output
   # @param [Array<Car>] result
   def self.search_result(result)
     table = Terminal::Table.new
-    table.title = 'Result'.colorize(:light_magenta).bold
-    table.headings = ['Field'.colorize(:light_magenta).bold, 'Information'.colorize(:light_magenta).bold]
+    table.title = I18n.t('tittles.result').colorize(:light_magenta).bold
+    table.headings = [I18n.t('headers.field').colorize(:light_magenta).bold,
+                      I18n.t('headers.information').colorize(:light_magenta).bold]
     set_search_table_style(table)
     result.each do |item|
       item.attributes.each do |key, value|
-        table << [key.to_s.colorize(:light_magenta), value.to_s.colorize(:magenta).italic]
+        table << [I18n.t("attributes.#{key}").to_s.colorize(:light_magenta), value.to_s.colorize(:magenta).italic]
       end
       table << :separator
     end

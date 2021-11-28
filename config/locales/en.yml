@@ -1,0 +1,35 @@
+en:
+  attributes:
+    id: 'ID'
+    make: 'Make'
+    model: 'Model'
+    year: 'Year'
+    year_from: 'Year from'
+    year_to: 'Year to'
+    odometer: 'Odometer'
+    price: 'Price'
+    price_from: 'Price from'
+    price_to: 'Price to'
+    description: 'Description'
+    date_added: 'Date added'
+    total_quantity: 'Total quantity'
+    request_quantity: 'Request quantity'
+    sort_order: 'Sort order'
+    sort_option: 'Sort option'
+  tittles:
+    statistic: 'Statistic'
+    result: 'Result'
+  headers:
+    field: 'Field'
+    information: 'Information'
+  input:
+    input: 'Input'
+    input_request: 'Please input'
+    wrong_option: 'Wrong option!!!'
+    request:
+      rules: 'Please input search rules(to skip one press enter)'
+      sort_option: 'Please input sort option'
+      sort_order: 'Please input sort order'
+  actions:
+    chosen: 'Chosen'
+  default: 'default'

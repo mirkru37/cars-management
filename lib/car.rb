@@ -62,6 +62,8 @@ class Car
 
   # @return [Integer]
   def max_attr_len
-    attributes.to_a.max_by { |item| item[0].to_s.length + item[1].to_s.length }.join.length
+    max = attributes.to_a.max_by { |item| I18n.t(item[0]).length + item[1].to_s.length }
+    max[0] = I18n.t(max[0])
+    max.join.length
   end
 end

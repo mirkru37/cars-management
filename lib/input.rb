@@ -3,10 +3,10 @@ class Input
   # @param [Inputable] rules
   # @param [String] message
   # @return [Inputable]
-  def self.param(parameters, message: 'Please input:')
+  def self.param(parameters, message: I18n.t('input.input_request'))
     puts message
     parameters.each do |param|
-      print "\t Input #{param.name}: "
+      print "\t#{I18n.t('input.input')} #{I18n.t("attributes.#{param.name}").downcase}:"
       begin
         param.value = gets.chomp
       rescue TypeError => e
@@ -27,13 +27,13 @@ class Input
     if default.nil?
       puts
     else
-      puts " default: #{default}"
+      puts " #{I18n.t('default')}: #{default}"
     end
     option = gets.downcase.chomp
     if options.include?(option)
       option
     elsif default.nil?
-      puts 'Wrong option!!'
+      puts I18n.t('input.wrong_option')
       options(options, default, message)
     else
       default

@@ -1,0 +1,35 @@
+ua:
+  attributes:
+    id: 'ID'
+    make: 'Виробник'
+    model: 'Модель'
+    year: 'Рік'
+    year_from: 'Рік від'
+    year_to: 'Рік до'
+    odometer: 'Одометер'
+    price: 'Ціна'
+    price_from: 'Ціна від'
+    price_to: 'Ціна до'
+    description: 'Опис'
+    date_added: 'Дата додавання'
+    total_quantity: 'Загальна кількість'
+    request_quantity: 'Кількість запитів'
+    sort_order: 'Порядок сортування'
+    sort_option: 'Сортувати за'
+  tittles:
+    statistic: 'Статистика'
+    result: 'Результат'
+  headers:
+    field: 'Поле'
+    information: 'Інформація'
+  input:
+    input: 'Ввід'
+    input_request: 'Будь-ласка введіть'
+    wrong_option: 'Неправильний вибір!!!'
+    request:
+      rules: 'Будь-ласка введіть правила пошуку(для пропуску нажміть enter)'
+      sort_option: 'Будь-ласка введіть сортувати за'
+      sort_order: 'Будь-ласка введіть порядок сортування'
+  actions:
+    chosen: 'Вибрано'
+  default: 'стандартно'
