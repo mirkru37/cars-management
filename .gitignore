@@ -56,3 +56,4 @@ build-iPhoneSimulator/
 
 # db
 /data/searches.yml
+/db/db.yml
