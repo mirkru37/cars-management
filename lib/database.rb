@@ -4,16 +4,12 @@ require 'fileutils'
 class Database
   attr_reader :path, :editable
 
-
-
   # @param [String] path
   def initialize(path, editable: true, create_if_not_exist: false)
     @path = path
     @editable = editable
-    begin
-      YAML.safe_load(File.open(path))
-    rescue Errno::ENOENT => e
-      raise e unless create_if_not_exist
+    unless File.exist?(path)
+      raise Errno::ENOENT unless create_if_not_exist
 
       create
     end
@@ -28,8 +24,8 @@ class Database
     end
   end
 
-  def create 
-    FileUtils.touch(@path)
+  def create
+    FileUtils.touch(@path)  
   rescue Errno::ENOENT
     FileUtils.mkdir_p(@path.split('/')[0...-1].join('/'))
     FileUtils.touch(@path)
