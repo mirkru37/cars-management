@@ -1,5 +1,6 @@
 require './lib/search_rule'
 require './lib/input'
+require './lib/output'
 require './lib/database'
 require './lib/car'
 require './lib/car_collection'
@@ -32,20 +33,9 @@ filtered = CarCollection.new(cars.filter_by_rules(rules))
 res = filtered.sort(sort_by: sort_by, sort_order: sort_order)
 
 search = Search.new(res.length, 1, rules)
-if searches.include?(search)
-  i = searches.index(search)
-  search.request_quantity = searches[i].request_quantity + 1
-  searches[i] = search
-else
-  searches << search
-end
-searches_database.dump(searches.to_hash['searches'])
-puts 'Statistic:', '',
-     "\tTotal quantity: #{search.total_quantity}", '',
-     "\tRequest quantity: #{search.request_quantity}", ''
+searches << search
 
-puts 'Result:', ''
-res.each do |item|
-  puts item
-  puts
-end
+searches_database.dump(searches.to_hash['searches'])
+
+Output.search_statistic(search)
+Output.search_result(res)

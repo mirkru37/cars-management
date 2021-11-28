@@ -15,12 +15,18 @@ class SearchCollection
 
   # @param [Search] search
   def append_search(search)
-    @searches << search
+    if include?(search)
+      i = index(search)
+      search.request_quantity = @searches[i].request_quantity + 1
+      @searches[i] = search
+    else
+      @searches << search
+    end
   end
 
   # @param [Hash] search
   def append_hash(search)
-    @searches << Search.new(*search.values)
+    append_search(Search.new(*search.values))
   end
 
   # @param [Array<Hash>] searches
