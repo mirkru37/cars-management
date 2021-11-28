@@ -1,10 +1,13 @@
-require './lib/rules'
+require './lib/search_rule'
 require './lib/input'
 require './lib/database'
 require './lib/car'
 require './lib/car_collection'
 require './lib/search_collection'
 require 'yaml'
+
+DB_PATH = 'db/db.yml'.freeze
+SEARCHES_PATH = '/db.yml'.freeze
 
 
 database = Database.new('db/db.yml', editable: false, create_if_not_exist: true)
@@ -28,7 +31,7 @@ puts "Chosen sort_by: #{sort_by} sort_order: #{sort_order}"
 filtered = CarCollection.new(cars.filter_by_rules(rules))
 res = filtered.sort(sort_by: sort_by, sort_order: sort_order)
 
-search = Search.new(res.length, 1, rules, res)
+search = Search.new(res.length, 1, rules)
 if searches.include?(search)
   i = searches.index(search)
   search.request_quantity = searches[i].request_quantity + 1

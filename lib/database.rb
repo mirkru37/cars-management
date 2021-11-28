@@ -25,7 +25,7 @@ class Database
   end
 
   def create
-    FileUtils.touch(@path)  
+    FileUtils.touch(@path)
   rescue Errno::ENOENT
     FileUtils.mkdir_p(@path.split('/')[0...-1].join('/'))
     FileUtils.touch(@path)
