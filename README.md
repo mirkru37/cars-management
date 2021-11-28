@@ -66,23 +66,6 @@ Also if you input **wrong** option, the **default** one will be chosen.
     rules:
       - name: make
         value: ford
-    result:
-      - id: 1ec46226-330f-11ec-8d3d-0242ac130003
-        make: Ford
-        model: Fusion
-        year: 2017
-        odometer: 65000
-        price: 18000.0
-        description: Selling a good car
-        date_added: 18/09/21
-      - id: 7073efd8-330f-11ec-8d3d-0242ac130003
-        make: Ford
-        model: Focus
-        year: 2017
-        odometer: 103000
-        price: 19000.0
-        description: Like new
-        date_added: 24/08/21
   - total_quantity: 0
     request_quantity: 3
     rules:
@@ -104,15 +87,6 @@ Also if you input **wrong** option, the **default** one will be chosen.
         value: 0.0
       - name: price_to
         value: 20000.0
-    result:
-      - id: 7073efd8-330f-11ec-8d3d-0242ac130003
-        make: Ford
-        model: Focus
-        year: 2017
-        odometer: 103000
-        price: 19000.0
-        description: Like new
-        date_added: 24/08/21
 ```
 
 ### Example
