@@ -37,5 +37,6 @@ searches << search
 
 searches_database.dump(searches.to_hash['searches'])
 
+Output.search_result_table_width = cars.max_attr_len
 Output.search_statistic(search)
 Output.search_result(res)

@@ -2,9 +2,12 @@ require 'date'
 
 class CarCollection
 
+  attr_reader :max_attr_len
+
   # @param [Array<Hash>]
   def initialize(all_cars = [])
     @all_cars = []
+    @max_attr_len = 0
     append(all_cars) if all_cars
   end
 
@@ -17,14 +20,14 @@ class CarCollection
   def append_cars(car)
     raise ArgumentError, "There already is object with id #{car.id}" if id?(car.id)
 
+    max_attr_len =  car.max_attr_len
+    @max_attr_len = max_attr_len if @max_attr_len < max_attr_len
     @all_cars << car
   end
 
   # @param [Hash] car
   def append_hash(car)
-    raise ArgumentError, "There already is object with id #{car.id}" if id?(car[:id])
-
-    @all_cars << Car.new(*car.values)
+    append_cars(Car.new(*car.values))
   end
 
   # @param [Array<Hash>] cars
@@ -36,7 +39,9 @@ class CarCollection
 
   # @param [Array<Car>] cars
   def append_array_car(cars)
-    @all_cars += cars
+    cars.each do |car|
+      append_cars(car)
+    end
   end
 
   # @param [Array<Hash>, Array<Car>] cars

@@ -32,7 +32,7 @@ class Car
 
   def to_s
     ["id: #{@id}", "make: #{@make}", "model: #{model}", "year: #{@year}", "odometer: #{@odometer}", "price: #{@price}",
-     "description: #{@description}", "date_added: #{@date_added.strftime(DATE_FORMAT)}"].join("\n")
+     "description: #{@description}", "date_added: #{date_added}"].join("\n")
   end
 
   # @param [SearchRule] rule
@@ -52,4 +52,16 @@ class Car
     end
   end
 
+  # @return [Hash]
+  def attributes
+    instance_variables.map do |attribute|
+      attribute = attribute.to_s.delete('@')
+      [attribute, send(attribute)]
+    end.to_h
+  end
+
+  # @return [Integer]
+  def max_attr_len
+    attributes.to_a.max_by { |item| item[0].to_s.length + item[1].to_s.length }.join.length
+  end
 end
