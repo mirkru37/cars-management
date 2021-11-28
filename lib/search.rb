@@ -3,19 +3,17 @@ require './lib/hashify'
 class Search
   include Hashify
 
-  attr_accessor :total_quantity, :request_quantity, :rules, :result
+  attr_accessor :total_quantity, :request_quantity, :rules
 
   # @param [Integer] total_quantity
   # @param [Integer] request_quantity
   # @param [Array<SearchRule>] rules
-  # @param [Array<Car>] result
-  def initialize(total_quantity = 0, request_quantity = 1, rules = [], result = [])
+  def initialize(total_quantity = 0, request_quantity = 1, rules = [])
     @total_quantity = total_quantity
     @request_quantity = request_quantity
     @rules = rules
-    @result = result
   end
-  
+
   # @param [Array<Hash>, Array<SearchRule>] other
   # @return [TrueClass, FalseClass]
   def equal_rules?(other)
