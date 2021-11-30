@@ -8,11 +8,11 @@ require './lib/search_collection'
 require 'yaml'
 
 DB_PATH = 'db/db.yml'.freeze
-SEARCHES_PATH = '/db.yml'.freeze
+SEARCHES_PATH = 'db/searches.yml'.freeze
 
 
-database = Database.new('db/db.yml', editable: false, create_if_not_exist: true)
-searches_database = Database.new('data/searches.yml', create_if_not_exist: true)
+database = Database.new(DB_PATH, editable: false, create_if_not_exist: true)
+searches_database = Database.new(SEARCHES_PATH, create_if_not_exist: true)
 rules = [SearchRule.new('make'), SearchRule.new('model'),
          SearchRule.year('year_from'), SearchRule.year('year_to'),
          SearchRule.price('price_from'), SearchRule.price('price_to')]
