@@ -36,6 +36,7 @@ class SearchRule < Inputable
   # @param [String] new_val
   def value=(new_val)
     super @validation_method.nil? ? new_val : @validation_method.call(new_val, **@validation_parameters)
+    @value.capitalize!
   end
 
   # override from Hashify to ignore specific fields
