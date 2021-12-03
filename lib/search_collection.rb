@@ -13,33 +13,16 @@ class SearchCollection
     append(searches) unless searches.nil?
   end
 
-  # @param [Search] search
-  def append_search(search)
-    if include?(search)
-      i = index(search)
-      search.request_quantity = @searches[i].request_quantity + 1
-      @searches[i] = search
+  # @param [Array<Hash>, Array<Search>, Hash, Search] searches
+  def append(searches)
+    if searches.instance_of?(Search)
+      append_search(searches)
+    elsif searches.instance_of?(Hash)
+      append_hash(searches)
+    elsif searches.instance_of?(Array)
+      append_array(searches)
     else
-      @searches << search
-    end
-  end
-
-  # @param [Hash] search
-  def append_hash(search)
-    append_search(Search.new(*search.values))
-  end
-
-  # @param [Array<Hash>] searches
-  def append_array_hash(searches)
-    searches.each do |search|
-      append_hash(search)
-    end
-  end
-
-  # @param [Array<Search>] searches
-  def append_array_search(searches)
-    searches.each do |search|
-      append_search(search)
+      raise ArgumentError, 'Invalid argument!'
     end
   end
 
@@ -54,24 +37,33 @@ class SearchCollection
     end
   end
 
-  # @param [Array<Hash>, Array<Search>, Hash, Search] searches
-  def append(searches)
-    if searches.instance_of?(Search)
-      append_search(searches)
-    elsif searches.instance_of?(Hash)
-      append_hash(searches)
-    elsif searches.instance_of?(Array)
-      append_array(searches)
+  # @param [Hash] search
+  def append_hash(search)
+    append_search(Search.new(*search.values))
+  end
+
+  # @param [Search] search
+  def append_search(search)
+    i = index(search)
+    if i.nil?
+      @searches << search
     else
-      raise ArgumentError, 'Invalid argument!'
+      search.request_quantity = @searches[i].request_quantity + 1
+      @searches[i] = search
     end
   end
 
-  # @param [Search] value
-  # @return [TrueClass, FalseClass]
-  def include?(value)
-    @searches.any? do |search|
-      search.equal_rules?(value.rules)
+  # @param [Array<Hash>] searches
+  def append_array_hash(searches)
+    searches.each do |search|
+      append_hash(search)
+    end
+  end
+
+  # @param [Array<Search>] searches
+  def append_array_search(searches)
+    searches.each do |search|
+      append_search(search)
     end
   end
 

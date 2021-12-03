@@ -1,6 +1,4 @@
-
 class Output
-
   # @param [Search] search
   def self.search_statistic(search)
     puts 'Statistic:', '',

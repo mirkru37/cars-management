@@ -1,7 +1,6 @@
 require 'date'
 
 class CarCollection
-
   # @param [Array<Hash>]
   def initialize(all_cars = [])
     @all_cars = []

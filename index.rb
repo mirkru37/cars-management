@@ -33,7 +33,7 @@ res = filtered.sort(sort_by: sort_by, sort_order: sort_order)
 search = Search.new(res.length, 1, rules)
 searches << search
 
-database.dump('searches',searches.to_hash['searches'])
+database.dump('searches', searches.to_hash['searches'])
 
 Output.search_statistic(search)
 Output.search_result(res)
