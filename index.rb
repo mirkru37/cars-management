@@ -7,17 +7,15 @@ require './lib/car_collection'
 require './lib/search_collection'
 require 'yaml'
 
-DB_PATH = 'db/db.yml'.freeze
-SEARCHES_PATH = 'db/searches.yml'.freeze
+DB_PATH = 'db'.freeze
 
 
-database = Database.new(DB_PATH, editable: false, create_if_not_exist: true)
-searches_database = Database.new(SEARCHES_PATH, create_if_not_exist: true)
+database = Database.new(DB_PATH)
 rules = [SearchRule.new('make'), SearchRule.new('model'),
          SearchRule.year('year_from'), SearchRule.year('year_to'),
          SearchRule.price('price_from'), SearchRule.price('price_to')]
-cars = CarCollection.new(database.load)
-searches = SearchCollection.new(searches_database.load)
+cars = CarCollection.new(database.load('db'))
+searches = SearchCollection.new(database.load('searches'))
 
 SORT_BY = %w[price date_added].freeze
 SORT_ORDER = %w[asc desc].freeze
@@ -35,7 +33,7 @@ res = filtered.sort(sort_by: sort_by, sort_order: sort_order)
 search = Search.new(res.length, 1, rules)
 searches << search
 
-searches_database.dump(searches.to_hash['searches'])
+database.dump('searches',searches.to_hash['searches'])
 
 Output.search_statistic(search)
 Output.search_result(res)

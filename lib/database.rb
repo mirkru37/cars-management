@@ -2,41 +2,58 @@
 require 'fileutils'
 
 class Database
-  attr_reader :path, :editable
+  attr_reader :path
 
   # @param [String] path
-  def initialize(path, editable: true, create_if_not_exist: false)
+  def initialize(path, create_if_not_exist: true)
     @path = path
-    @editable = editable
-    unless File.exist?(path)
-      raise Errno::ENOENT unless create_if_not_exist
-
-      create
-    end
+    @tables = {}
+    @create_if_not_exist = create_if_not_exist
+    create_folder
   end
 
-  def load
-    data = YAML.safe_load(File.open(path))
-    if data.nil?
-      []
-    else
-      data.is_a?(Array) ? data : [data]
-    end
+  # @param [String] name
+  def create_table(name)
+    return if table_exist?(name)
+
+    raise Errno::ENOENT, "Table doesn't exist" unless @create_if_not_exist
+
+    FileUtils.touch(table_path(name))
   end
 
-  def create
-    FileUtils.touch(@path)
-  rescue Errno::ENOENT
-    FileUtils.mkdir_p(@path.split('/')[0...-1].join('/'))
-    FileUtils.touch(@path)
+  def create_folder
+    return if File.directory?(@path)
+
+    raise Errno::ENOENT, "Database folder doesn't exist" unless @create_if_not_exist
+
+    FileUtils.mkdir_p(@path)
   end
 
+  # @param [String] table_name
   # @param [Object] data
-  def dump(data)
-    raise SecurityError, 'File is not editable' unless @editable
-
-    File.write(@path, data.to_yaml)
+  def dump(table_name, data)
+    create_table(table_name)
+    File.write(table_path(table_name), data.to_yaml)
   end
 
-  private :create
+  # @param [String] table_name
+  # @return [Array]
+  def load(table_name)
+    create_table(table_name)
+    Array(YAML.safe_load(File.open(table_path(table_name))))
+  end
+
+  # @param [String] name
+  # @return [TrueClass, FalseClass]
+  def table_exist?(name)
+    File.file?(table_path(name))
+  end
+
+  # @param [String] name
+  # @return [String]
+  def table_path(name)
+    "#{@path}/#{name}.yml"
+  end
+
+  private :create_table, :create_folder
 end
