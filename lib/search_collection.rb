@@ -5,35 +5,20 @@ require './lib/hashify'
 class SearchCollection
   include Hashify
 
-  attr_reader :searches
-
-  # @param [Array<Hash>, Array<Search>, Hash, Search, nil] searches
+  # @param [Array<Hash>, Search] searches
   def initialize(searches)
     @searches = []
     append(searches) unless searches.nil?
   end
 
-  # @param [Array<Hash>, Array<Search>, Hash, Search] searches
+  # @param [Array<Hash>, Search] searches
   def append(searches)
     if searches.instance_of?(Search)
       append_search(searches)
-    elsif searches.instance_of?(Hash)
-      append_hash(searches)
     elsif searches.instance_of?(Array)
-      append_array(searches)
+      append_array_hash(searches)
     else
       raise ArgumentError, 'Invalid argument!'
-    end
-  end
-
-  # @param [Array<Hash>, Array<Search>] searches
-  def append_array(searches)
-    if searches.all? { |obj| obj.instance_of?(Hash) }
-      append_array_hash(searches)
-    elsif searches.all? { |obj| obj.instance_of?(Search) }
-      append_array_search(searches)
-    else
-      raise ArgumentError, 'Invalid array members!'
     end
   end
 
@@ -48,7 +33,6 @@ class SearchCollection
     if i.nil?
       @searches << search
     else
-      search.request_quantity = @searches[i].request_quantity + 1
       @searches[i] = search
     end
   end
@@ -60,13 +44,6 @@ class SearchCollection
     end
   end
 
-  # @param [Array<Search>] searches
-  def append_array_search(searches)
-    searches.each do |search|
-      append_search(search)
-    end
-  end
-
   # @param [Search] other
   def index(other)
     @searches.index do |search|
@@ -74,8 +51,12 @@ class SearchCollection
     end
   end
 
-  def <<(searches)
-    append(searches)
+  # @param [Search] search
+  def request_quantity_sum(search)
+    i = index(search)
+    return search.request_quantity if i.nil?
+
+    search.request_quantity + @searches[i].request_quantity
   end
 
   # @param [Integer] idn

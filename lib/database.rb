@@ -1,15 +1,12 @@
-# database controller for YAML
 require 'fileutils'
 
+# database controller for YAML
 class Database
-  attr_reader :path
+  DB_PATH = 'db'.freeze
 
-  # @param [String] path
-  def initialize(path, create_if_not_exist: true)
-    @path = path
-    @tables = {}
+  # @param [FalseClass, TrueClass] create_if_not_exist
+  def initialize(create_if_not_exist: true)
     @create_if_not_exist = create_if_not_exist
-    create_folder
   end
 
   # @param [String] name
@@ -19,14 +16,6 @@ class Database
     raise Errno::ENOENT, "Table doesn't exist" unless @create_if_not_exist
 
     FileUtils.touch(table_path(name))
-  end
-
-  def create_folder
-    return if File.directory?(@path)
-
-    raise Errno::ENOENT, "Database folder doesn't exist" unless @create_if_not_exist
-
-    FileUtils.mkdir_p(@path)
   end
 
   # @param [String] table_name
@@ -52,8 +41,8 @@ class Database
   # @param [String] name
   # @return [String]
   def table_path(name)
-    "#{@path}/#{name}.yml"
+    "#{DB_PATH}/#{name}.yml"
   end
 
-  private :create_table, :create_folder
+  private :create_table
 end

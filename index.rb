@@ -7,10 +7,7 @@ require './lib/car_collection'
 require './lib/search_collection'
 require 'yaml'
 
-DB_PATH = 'db'.freeze
-
-
-database = Database.new(DB_PATH)
+database = Database.new
 rules = [SearchRule.new('make'), SearchRule.new('model'),
          SearchRule.year('year_from'), SearchRule.year('year_to'),
          SearchRule.price('price_from'), SearchRule.price('price_to')]
@@ -31,7 +28,8 @@ filtered = CarCollection.new(cars.filter_by_rules(rules))
 res = filtered.sort(sort_by: sort_by, sort_order: sort_order)
 
 search = Search.new(res.length, 1, rules)
-searches << search
+search.request_quantity = searches.request_quantity_sum(search)
+searches.append(search)
 
 database.dump('searches', searches.to_hash['searches'])
 
