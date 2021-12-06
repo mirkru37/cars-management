@@ -5,26 +5,23 @@ require './lib/hashify'
 class SearchCollection
   include Hashify
 
-  # @param [Array<Hash>, Search] searches
+  # @param [Array<Hash>] searches
   def initialize(searches)
     @searches = []
-    append(searches) unless searches.nil?
+    append(searches) unless searches.empty?
   end
 
-  # @param [Array<Hash>, Search] searches
+  # @param [Array<Hash>] searches
   def append(searches)
-    if searches.instance_of?(Search)
-      append_search(searches)
-    elsif searches.instance_of?(Array)
-      append_array_hash(searches)
-    else
-      raise ArgumentError, 'Invalid argument!'
+    searches.each do |search|
+      append_hash(search)
     end
   end
 
   # @param [Hash] search
   def append_hash(search)
-    append_search(Search.new(*search.values))
+    new_search = Search.new(*search.values)
+    append_search(new_search)
   end
 
   # @param [Search] search
@@ -37,13 +34,6 @@ class SearchCollection
     end
   end
 
-  # @param [Array<Hash>] searches
-  def append_array_hash(searches)
-    searches.each do |search|
-      append_hash(search)
-    end
-  end
-
   # @param [Search] other
   def index(other)
     @searches.index do |search|
@@ -51,22 +41,9 @@ class SearchCollection
     end
   end
 
-  # @param [Search] search
-  def request_quantity_sum(search)
-    i = index(search)
-    return search.request_quantity if i.nil?
-
-    search.request_quantity + @searches[i].request_quantity
-  end
-
   # @param [Integer] idn
+  # @return [Search]
   def [](idn)
     @searches[idn]
-  end
-
-  # @param [Integer] idn
-  # @param [Search] val
-  def []=(idn, val)
-    @searches[idn] = val
   end
 end

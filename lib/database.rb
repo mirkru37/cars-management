@@ -29,7 +29,9 @@ class Database
   # @return [Array]
   def load(table_name)
     create_table(table_name)
-    Array(YAML.safe_load(File.open(table_path(table_name))))
+    path = table_path(table_name)
+    data = YAML.safe_load(File.open(path))
+    Array(data)
   end
 
   # @param [String] name
@@ -44,5 +46,5 @@ class Database
     "#{DB_PATH}/#{name}.yml"
   end
 
-  private :create_table
+  private :create_table, :table_path
 end

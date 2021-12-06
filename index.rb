@@ -1,4 +1,5 @@
 require './lib/search_rule'
+require './lib/search_counter'
 require './lib/input'
 require './lib/output'
 require './lib/database'
@@ -28,8 +29,8 @@ filtered = CarCollection.new(cars.filter_by_rules(rules))
 res = filtered.sort(sort_by: sort_by, sort_order: sort_order)
 
 search = Search.new(res.length, 1, rules)
-search.request_quantity = searches.request_quantity_sum(search)
-searches.append(search)
+search.request_quantity = SearchCounter.call(searches, search)
+searches.append_search(search)
 
 database.dump('searches', searches.to_hash['searches'])
 
