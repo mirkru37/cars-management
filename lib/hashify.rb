@@ -1,4 +1,3 @@
-
 module Hashify
   # https://dev.to/ayushn21/how-to-generate-yaml-from-ruby-objects-without-type-annotations-4fli
 
@@ -15,17 +14,13 @@ module Hashify
 
     # Iterate over all the instance variables and store their
     # names and values in a hash
-
     instance_variables.each do |var|
-      next if excluded_ivars.include?(var.to_s)
+      next if excluded_ivars.include? var.to_s
 
-      # edited for calling access method of field
-      var = var.to_s.delete('@').to_sym
-      value = send(var)
+      value = instance_variable_get(var)
+      value = value.map(&:to_hash) if value.is_a? Array
 
-      value = value.map(&:to_hash) if value.is_a?(Array)
-
-      hash[var.to_s] = value
+      hash[var.to_s.delete('@')] = value
     end
 
     hash

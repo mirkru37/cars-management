@@ -1,7 +1,6 @@
 require 'date'
 
 class CarCollection
-
   attr_reader :max_attr_len
 
   # @param [Array<Hash>]

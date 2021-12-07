@@ -14,7 +14,7 @@ class Search
     @rules = rules
   end
 
-  # @param [Array<Hash>, Array<SearchRule>] other
+  # @param [Array<SearchRule>] other
   # @return [TrueClass, FalseClass]
   def equal_rules?(other)
     return other.empty? if @rules.empty?
@@ -22,11 +22,15 @@ class Search
 
     @rules.all? do |rule|
       i = other.index do |other_rule|
-        other_rule.to_hash['name'].casecmp(rule.to_hash['name'])
+        other_rule.name == rule.name
       end
       return false if i.nil?
 
-      other[i].to_hash['value'] == rule.to_hash['value']
+      if other[i].value.instance_of?(String) || rule.value.instance_of?(String)
+        other[i].value.to_s.downcase == rule.value.to_s.downcase
+      else
+        other[i].value == rule.value
+      end
     end
   end
 end

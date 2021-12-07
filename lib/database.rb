@@ -1,42 +1,50 @@
-# database controller for YAML
 require 'fileutils'
 
+# database controller for YAML
 class Database
-  attr_reader :path, :editable
+  DB_PATH = 'db'.freeze
 
-  # @param [String] path
-  def initialize(path, editable: true, create_if_not_exist: false)
-    @path = path
-    @editable = editable
-    unless File.exist?(path)
-      raise Errno::ENOENT unless create_if_not_exist
-
-      create
-    end
+  # @param [FalseClass, TrueClass] create_if_not_exist
+  def initialize(create_if_not_exist: true)
+    @create_if_not_exist = create_if_not_exist
   end
 
-  def load
-    data = YAML.safe_load(File.open(path))
-    if data.nil?
-      []
-    else
-      data.is_a?(Array) ? data : [data]
-    end
-  end
-
-  def create
-    FileUtils.touch(@path)
-  rescue Errno::ENOENT
-    FileUtils.mkdir_p(@path.split('/')[0...-1].join('/'))
-    FileUtils.touch(@path)
-  end
-
+  # @param [String] table_name
   # @param [Object] data
-  def dump(data)
-    raise SecurityError, 'File is not editable' unless @editable
-
-    File.write(@path, data.to_yaml)
+  def dump(table_name, data)
+    create_table(table_name)
+    File.write(table_path(table_name), data.to_yaml)
   end
 
-  private :create
+  # @param [String] table_name
+  # @return [Array]
+  def load(table_name)
+    create_table(table_name)
+    path = table_path(table_name)
+    data = YAML.safe_load(File.open(path))
+    Array(data)
+  end
+
+  private
+
+  # @param [String] name
+  def create_table(name)
+    return if table_exist?(name)
+
+    raise Errno::ENOENT, "Table doesn't exist" unless @create_if_not_exist
+
+    FileUtils.touch(table_path(name))
+  end
+
+  # @param [String] name
+  # @return [TrueClass, FalseClass]
+  def table_exist?(name)
+    File.file?(table_path(name))
+  end
+
+  # @param [String] name
+  # @return [String]
+  def table_path(name)
+    "#{DB_PATH}/#{name}.yml"
+  end
 end
