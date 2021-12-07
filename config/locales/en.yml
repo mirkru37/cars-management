@@ -30,6 +30,7 @@ en:
       rules: 'Please input search rules(to skip one press enter)'
       sort_option: 'Please input sort option'
       sort_order: 'Please input sort order'
+      language: 'Please choose language'
   actions:
     chosen: 'Chosen'
   default: 'default'

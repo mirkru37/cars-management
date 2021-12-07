@@ -9,8 +9,9 @@ require './lib/search_collection'
 require 'yaml'
 require 'i18n'
 
-I18n.load_path << Dir["#{File.expand_path('config/locales')}/*.yml"]
-I18n.locale = :ua
+SORT_BY = %w[price date_added].freeze
+SORT_ORDER = %w[asc desc].freeze
+LOCALES = %w[ua en].freeze
 
 database = Database.new
 rules = [SearchRule.new('make'), SearchRule.new('model'),
@@ -19,8 +20,10 @@ rules = [SearchRule.new('make'), SearchRule.new('model'),
 cars = CarCollection.new(database.load('db'))
 searches = SearchCollection.new(database.load('searches'))
 
-SORT_BY = %w[price date_added].freeze
-SORT_ORDER = %w[asc desc].freeze
+I18n.load_path << Dir["#{File.expand_path('config/locales')}/*.yml"]
+locale = Input.option(LOCALES, default: 'en', message: I18n.t('input.request.language'))
+I18n.locale = locale
+
 Input.param(rules, message: I18n.t('input.request.rules'))
 rules.delete_if do |rule|
   rule.value.to_s.strip.empty?

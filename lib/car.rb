@@ -1,8 +1,6 @@
 class Car
   DATE_FORMAT = '%d/%m/%y'.freeze
 
-  attr_reader :id, :make, :model, :year, :odometer, :price, :description, :date_added
-
   # @param [String] id
   # @param [String] make
   # @param [String] model
@@ -20,11 +18,6 @@ class Car
     @price = price.to_f
     @description = description
     @date_added = date_added.instance_of?(String) ? DateTime.strptime(date_added, DATE_FORMAT) : date_added
-  end
-
-  def to_s
-    ["id: #{@id}", "make: #{@make}", "model: #{model}", "year: #{@year}", "odometer: #{@odometer}", "price: #{@price}",
-     "description: #{@description}", "date_added: #{date_added}"].join("\n")
   end
 
   # @param [SearchRule] rule
@@ -47,15 +40,17 @@ class Car
   # @return [Hash]
   def attributes
     instance_variables.map do |attribute|
+      value = instance_variable_get(attribute)
       attribute = attribute.to_s.delete('@')
-      [attribute, send(attribute)]
+      [attribute, value]
     end.to_h
   end
 
   # @return [Integer]
   def max_attr_len
-    max = attributes.to_a.max_by { |item| I18n.t(item[0]).length + item[1].to_s.length }
-    max[0] = I18n.t(max[0])
-    max.join.length
+    attributes_ = attributes
+    max_key = attributes_.keys.map { |key| I18n.t("attributes.#{key}").length }.max
+    max_value = attributes_.values.map { |value| value.to_s.length }.max
+    max_key + max_value
   end
 end
