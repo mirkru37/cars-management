@@ -33,4 +33,12 @@ en:
       language: 'Please choose language'
   actions:
     chosen: 'Chosen'
+  words:
+    argument: 'Argument'
+    integer: 'integer'
+    number: 'number'
+    and: 'and'
+  sentences:
+    must_be: 'must be'
+    is_not: 'is not a'
   default: 'default'

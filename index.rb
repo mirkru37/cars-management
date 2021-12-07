@@ -21,6 +21,7 @@ cars = CarCollection.new(database.load('db'))
 searches = SearchCollection.new(database.load('searches'))
 
 I18n.load_path << Dir["#{File.expand_path('config/locales')}/*.yml"]
+I18n.default_locale = :en
 locale = Input.option(LOCALES, default: 'en', message: I18n.t('input.request.language'))
 I18n.locale = locale
 
