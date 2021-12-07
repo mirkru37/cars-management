@@ -26,6 +26,14 @@ class SearchCollection
     end
   end
 
+  # @param [Integer] idn
+  # @return [Search]
+  def [](idn)
+    @searches[idn]
+  end
+
+  private
+
   # @param [Array<Hash>] searches
   def init_searches(searches)
     searches.map do |search|
@@ -38,12 +46,4 @@ class SearchCollection
       new_search
     end
   end
-
-  # @param [Integer] idn
-  # @return [Search]
-  def [](idn)
-    @searches[idn]
-  end
-
-  private :init_searches
 end

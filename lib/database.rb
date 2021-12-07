@@ -9,15 +9,6 @@ class Database
     @create_if_not_exist = create_if_not_exist
   end
 
-  # @param [String] name
-  def create_table(name)
-    return if table_exist?(name)
-
-    raise Errno::ENOENT, "Table doesn't exist" unless @create_if_not_exist
-
-    FileUtils.touch(table_path(name))
-  end
-
   # @param [String] table_name
   # @param [Object] data
   def dump(table_name, data)
@@ -34,6 +25,18 @@ class Database
     Array(data)
   end
 
+
+  private
+
+  # @param [String] name
+  def create_table(name)
+    return if table_exist?(name)
+
+    raise Errno::ENOENT, "Table doesn't exist" unless @create_if_not_exist
+
+    FileUtils.touch(table_path(name))
+  end
+
   # @param [String] name
   # @return [TrueClass, FalseClass]
   def table_exist?(name)
@@ -45,6 +48,4 @@ class Database
   def table_path(name)
     "#{DB_PATH}/#{name}.yml"
   end
-
-  private :create_table, :table_path, :table_exist?
 end
