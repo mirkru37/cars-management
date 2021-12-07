@@ -1,5 +1,3 @@
-require './lib/hashify'
-
 class Car
   DATE_FORMAT = '%d/%m/%y'.freeze
 

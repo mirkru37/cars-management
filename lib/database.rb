@@ -46,5 +46,5 @@ class Database
     "#{DB_PATH}/#{name}.yml"
   end
 
-  private :create_table, :table_path
+  private :create_table, :table_path, :table_exist?
 end

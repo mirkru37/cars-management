@@ -30,7 +30,7 @@ res = filtered.sort(sort_by: sort_by, sort_order: sort_order)
 
 search = Search.new(res.length, 1, rules)
 search.request_quantity = SearchCounter.call(searches, search)
-searches.append_search(search)
+searches.append(search)
 
 database.dump('searches', searches.to_hash['searches'])
 

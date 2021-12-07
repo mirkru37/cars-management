@@ -1,5 +1,4 @@
 require './lib/search'
-require './lib/car_collection'
 require './lib/hashify'
 
 class SearchCollection
@@ -7,25 +6,11 @@ class SearchCollection
 
   # @param [Array<Hash>] searches
   def initialize(searches)
-    @searches = []
-    append(searches) unless searches.empty?
-  end
-
-  # @param [Array<Hash>] searches
-  def append(searches)
-    searches.each do |search|
-      append_hash(search)
-    end
-  end
-
-  # @param [Hash] search
-  def append_hash(search)
-    new_search = Search.new(*search.values)
-    append_search(new_search)
+    @searches = init_searches(searches)
   end
 
   # @param [Search] search
-  def append_search(search)
+  def append(search)
     i = index(search)
     if i.nil?
       @searches << search
@@ -41,9 +26,24 @@ class SearchCollection
     end
   end
 
+  # @param [Array<Hash>] searches
+  def init_searches(searches)
+    searches.map do |search|
+      search['rules'].map! do |rule|
+        rule_ = SearchRule.new(rule['name'])
+        rule_.value = rule['value']
+        rule_
+      end
+      new_search = Search.new(*search.values)
+      new_search
+    end
+  end
+
   # @param [Integer] idn
   # @return [Search]
   def [](idn)
     @searches[idn]
   end
+
+  private :init_searches
 end
