@@ -1,6 +1,7 @@
 require './lib/search_rule'
 require './lib/search_counter'
 require './lib/input'
+require './lib/i18n_config'
 require './lib/output'
 require './lib/database'
 require './lib/car'
@@ -20,10 +21,8 @@ rules = [SearchRule.new('make'), SearchRule.new('model'),
 cars = CarCollection.new(database.load('db'))
 searches = SearchCollection.new(database.load('searches'))
 
-I18n.load_path << Dir["#{File.expand_path('config/locales')}/*.yml"]
-I18n.default_locale = :en
-locale = Input.option(LOCALES, default: 'en', message: I18n.t('input.request.language'))
-I18n.locale = locale
+I18nConfig.init
+I18nConfig.choose_language(LOCALES)
 
 Input.param(rules, message: I18n.t('input.request.rules'))
 rules.delete_if do |rule|
