@@ -43,5 +43,4 @@ class Car
       val.to_s.casecmp?(rule.value.to_s)
     end
   end
-
 end

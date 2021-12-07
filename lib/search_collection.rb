@@ -42,8 +42,7 @@ class SearchCollection
         rule_.value = rule['value']
         rule_
       end
-      new_search = Search.new(*search.values)
-      new_search
+      Search.new(*search.values)
     end
   end
 end

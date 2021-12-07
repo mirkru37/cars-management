@@ -25,7 +25,6 @@ class Database
     Array(data)
   end
 
-
   private
 
   # @param [String] name
