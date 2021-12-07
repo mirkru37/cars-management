@@ -1,5 +1,4 @@
 class Car
-
   DATE_FORMAT = '%d/%m/%y'.freeze
 
   attr_reader :id, :make, :model, :year, :odometer, :price, :description, :date_added
@@ -44,5 +43,4 @@ class Car
       val.to_s.casecmp?(rule.value.to_s)
     end
   end
-
 end

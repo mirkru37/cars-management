@@ -1,4 +1,3 @@
-
 class Input
   # @param [Inputable] rules
   # @param [String] message
