@@ -18,6 +18,7 @@ jobs:
           bundler-cache: true
       - name: Run security checks
         run: |
+          bundle install
           bundler audit
           bundler leak
       - name: Run linters
