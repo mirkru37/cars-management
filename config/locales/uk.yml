@@ -12,16 +12,17 @@ uk:
     price_to: 'Ціна до'
     description: 'Опис'
     date_added: 'Дата додавання'
-    total_quantity: 'Загальна кількість'
-    request_quantity: 'Кількість запитів'
     sort_order: 'Порядок сортування'
     sort_option: 'Сортувати за'
   tittles:
     statistic: 'Статистика'
     result: 'Результат'
+    empty_table: 'Тут нічого немає'
   headers:
     field: 'Поле'
     information: 'Інформація'
+    total_quantity: 'Загальна кількість'
+    request_quantity: 'Кількість запитів'
   input:
     input: 'Ввід'
     input_request: 'Будь-ласка введіть'

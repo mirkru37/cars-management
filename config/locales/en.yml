@@ -12,16 +12,17 @@ en:
     price_to: 'Price to'
     description: 'Description'
     date_added: 'Date added'
-    total_quantity: 'Total quantity'
-    request_quantity: 'Request quantity'
     sort_order: 'Sort order'
     sort_option: 'Sort option'
   tittles:
     statistic: 'Statistic'
     result: 'Result'
+    empty_table: 'Table is empty'
   headers:
     field: 'Field'
     information: 'Information'
+    total_quantity: 'Total quantity'
+    request_quantity: 'Request quantity'
   input:
     input: 'Input'
     input_request: 'Please input'
