@@ -24,7 +24,7 @@ Style/RegexpLiteral:
 # Layout ----------------------------------------------------------------------
 
 Layout/LineLength:
-  Max: 120
+  Max: 150
 
 Layout/MultilineMethodCallIndentation:
   EnforcedStyle: indented
@@ -52,3 +52,9 @@ Layout/ClassStructure:
 
 Metrics/ParameterLists:
   Max: 8
+
+Metrics/AbcSize:
+  Max: 25
+
+Metrics/MethodLength:
+  Max: 15

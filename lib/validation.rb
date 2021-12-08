@@ -8,9 +8,7 @@ class Validation
   # @return [Integer]
   def self.year(value, max_year: DateTime.now.year, min_year: 1800)
     return value if value.to_s.strip.empty?
-    unless int?(value)
-      raise TypeError, "#{I18n.t('words.argument')} #{value}  #{I18n.t('sentences.is_not')} #{I18n.t('words.integer')}"
-    end
+    raise TypeError, "#{I18n.t('words.argument')} #{value}  #{I18n.t('sentences.is_not')} #{I18n.t('words.integer')}" unless int?(value)
 
     value = value.to_i
     unless value >= min_year && value <= max_year
@@ -25,9 +23,7 @@ class Validation
   # @return [Float]
   def self.price(value, max_price: Float::MAX, min_price: 0)
     return value if value.to_s.strip.empty?
-    unless number?(value)
-      raise TypeError, "#{I18n.t('words.argument')} #{value} #{I18n.t('sentences.is_not')} #{I18n.t('words.number')}"
-    end
+    raise TypeError, "#{I18n.t('words.argument')} #{value} #{I18n.t('sentences.is_not')} #{I18n.t('words.number')}" unless number?(value)
 
     value = value.to_f.round(2)
     unless value >= min_price && value <= max_price

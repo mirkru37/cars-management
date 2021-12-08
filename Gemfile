@@ -19,3 +19,9 @@ gem 'rubocop-rake', require: false
 gem 'rubocop-performance', require: false
 
 gem 'rubocop-md'
+
+gem 'bundler-audit'
+
+gem 'bundler-leak'
+
+gem 'lefthook'
