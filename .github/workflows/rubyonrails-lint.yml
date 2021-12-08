@@ -24,8 +24,8 @@ jobs:
       # Add or Replace any other security checks here
       - name: Run security checks
         run: |
-          bundler-audit --update
-          bundler-lake
+          bundler-audit check --update
+          bundler-lake check --update
       # Add or Replace any other Linters here
       - name: Run linters
         run: |
