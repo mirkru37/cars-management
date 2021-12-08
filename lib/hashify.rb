@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Hashify
   # https://dev.to/ayushn21/how-to-generate-yaml-from-ruby-objects-without-type-annotations-4fli
 

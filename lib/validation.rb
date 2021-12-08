@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'date'
 
 class Validation
@@ -39,7 +41,6 @@ class Validation
     Float(val)
   rescue ArgumentError
     false
-
   end
 
   def self.int?(val)

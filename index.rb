@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/search_rule'
 require './lib/search_counter'
 require './lib/input'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Input
   # @param [Inputable] rules
   # @param [String] message
@@ -21,21 +23,14 @@ class Input
   # @return [String]
   def self.option(options, default: nil, message: '')
     options = options.map(&:downcase)
-    print message
-    print ' (', options.join(' | '), ')'
-    if default.nil?
-      puts
-    else
-      puts " #{I18n.t('default')}: #{default}"
-    end
+    print message, ' (', options.join(' | '), ')'
+    default.nil? ? puts : puts("#{I18n.t('default')}: #{default}")
     option = gets.downcase.chomp
-    if options.include?(option)
-      option
-    elsif default.nil?
-      puts I18n.t('input.wrong_option')
-      options(options, default, message)
-    else
-      default
-    end
+    return option if options.include?(option)
+
+    return default unless default.nil?
+
+    puts I18n.t('input.wrong_option')
+    options(options, default, message)
   end
 end

@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 class Car
-  DATE_FORMAT = '%d/%m/%y'.freeze
+  DATE_FORMAT = '%d/%m/%y'
 
   # @param [String] id
   # @param [String] make

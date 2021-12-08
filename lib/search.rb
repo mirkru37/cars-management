@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/hashify'
 
 class Search
@@ -21,16 +23,10 @@ class Search
     return false if other.length != @rules.length
 
     @rules.all? do |rule|
-      i = other.index do |other_rule|
-        other_rule.name == rule.name
-      end
+      i = other.index { |other_rule| other_rule.name == rule.name }
       return false if i.nil?
 
-      if other[i].value.instance_of?(String) || rule.value.instance_of?(String)
-        other[i].value.to_s.downcase == rule.value.to_s.downcase
-      else
-        other[i].value == rule.value
-      end
+      rule.value.instance_of?(String) ? other[i].value.casecmp(rule.value).zero? : other[i].value == rule.value
     end
   end
 end

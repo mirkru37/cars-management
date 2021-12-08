@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Inputable
   attr_reader :name
   attr_accessor :value

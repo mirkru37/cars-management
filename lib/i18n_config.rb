@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class I18nConfig
   def self.init
     I18n.load_path << Dir["#{File.expand_path('config/locales')}/*.yml"]
