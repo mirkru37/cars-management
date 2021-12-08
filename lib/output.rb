@@ -2,7 +2,7 @@ require 'terminal-table'
 require 'colorize'
 
 class Output
-  MIN_LENGTH = 20
+  MIN_LENGTH = 40
 
   @search_result_table_width = 80
 
@@ -22,17 +22,23 @@ class Output
   # @param [Array<Car>] result
   def self.search_result(result)
     table = Terminal::Table.new
-    table.title = I18n.t('tittles.result').colorize(:light_magenta).bold
-    table.headings = [I18n.t('headers.field').colorize(:light_magenta).bold,
-                      I18n.t('headers.information').colorize(:light_magenta).bold]
-    do_search_table_style(table)
-    result.each do |item|
-      item.attributes.each do |key, value|
-        value = value.strftime(Car::DATE_FORMAT) if value.instance_of?(DateTime)
-        table << [I18n.t("attributes.#{key}").to_s.colorize(:light_magenta), value.to_s.colorize(:magenta).italic]
-      end
+    if result.empty?
+      table.title = 'Table is empty'.colorize(:light_red).bold
+      table << [' ']
       table << :separator
+    else
+      table.title = I18n.t('tittles.result').colorize(:light_magenta).bold
+      table.headings = [I18n.t('headers.field').colorize(:light_magenta).bold,
+                        I18n.t('headers.information').colorize(:light_magenta).bold]
+      result.each do |item|
+        item.attributes.each do |key, value|
+          value = value.strftime(Car::DATE_FORMAT) if value.instance_of?(DateTime)
+          table << [I18n.t("attributes.#{key}").to_s.colorize(:light_magenta), value.to_s.colorize(:magenta).italic]
+        end
+        table << :separator
+      end
     end
+    do_search_table_style(table)
     puts table
   end
 
