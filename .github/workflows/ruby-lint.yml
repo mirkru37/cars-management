@@ -16,4 +16,7 @@ jobs:
           bundler-cache: true
       - name: Run security checks
         run: |
-            ruby index.rb
+          bundler
+      - name: Run linters
+        run: |
+          rubocop --parallel
