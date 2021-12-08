@@ -18,7 +18,8 @@ jobs:
           bundler-cache: true
       - name: Run security checks
         run: |
-          bundler
+          bundler audit
+          bundler leak
       - name: Run linters
         run: |
-          rubocop --parallel
+          bundler exec rubocop
