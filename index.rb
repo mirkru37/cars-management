@@ -12,7 +12,7 @@ require 'i18n'
 
 SORT_BY = %w[price date_added].freeze
 SORT_ORDER = %w[asc desc].freeze
-LOCALES = %w[ua en].freeze
+LOCALES = %w[uk en].freeze
 
 database = Database.new
 rules = [SearchRule.new('make'), SearchRule.new('model'),
