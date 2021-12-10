@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+# 
 class Car
-  DATE_FORMAT = '%d/%m/%y'.freeze
-
+  DATE_FORMAT = '%d/%m/%y'
+  ATTR_LIST = %w[id make model year odometer price description date_added]
+  
   # @param [String] id
   # @param [String] make
   # @param [String] model
@@ -39,9 +42,8 @@ class Car
 
   # @return [Hash]
   def attributes
-    instance_variables.map do |attribute|
-      value = instance_variable_get(attribute)
-      attribute = attribute.to_s.delete('@')
+    ATTR_LIST.map do |attribute|
+      value = instance_variable_get("@#{attribute}")
       [attribute, value]
     end.to_h
   end
