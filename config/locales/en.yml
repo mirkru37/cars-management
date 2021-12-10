@@ -14,14 +14,14 @@ en:
     date_added: 'Date added'
     sort_order: 'Sort order'
     sort_option: 'Sort option'
-  tittles:
+  titles:
     statistic: 'Statistic'
     result: 'Result'
     empty_table: 'Table is empty'
   headers:
     field: 'Field'
     information: 'Information'
-    total_quantity: 'Total quantity'
+    total_quantity: 'Cars found'
     request_quantity: 'Request quantity'
   input:
     input: 'Input'

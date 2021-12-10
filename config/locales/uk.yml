@@ -14,22 +14,22 @@ uk:
     date_added: 'Дата додавання'
     sort_order: 'Порядок сортування'
     sort_option: 'Сортувати за'
-  tittles:
+  titles:
     statistic: 'Статистика'
     result: 'Результат'
     empty_table: 'Тут нічого немає'
   headers:
     field: 'Поле'
     information: 'Інформація'
-    total_quantity: 'Загальна кількість'
+    total_quantity: 'Знайдено машин'
     request_quantity: 'Кількість запитів'
   input:
-    input: 'Ввід'
+    input: 'Введіть'
     input_request: 'Будь-ласка введіть'
     wrong_option: 'Неправильний вибір!!!'
     request:
       rules: 'Будь-ласка введіть правила пошуку(для пропуску нажміть enter)'
-      sort_option: 'Будь-ласка введіть сортувати за'
+      sort_option: 'Будь-ласка введіть атрибут для сортування'
       sort_order: 'Будь-ласка введіть порядок сортування'
       language: 'Будь-ласка виберіть мову'
   actions:
@@ -42,4 +42,4 @@ uk:
   sentences:
     must_be: 'повинен бути'
     is_not: 'не є'
-  default: 'стандартно'
+  default: 'за замовчуванням'
