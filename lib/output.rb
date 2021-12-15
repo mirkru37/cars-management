@@ -1,10 +1,9 @@
 require 'terminal-table'
 require 'colorize'
-require './lib/style'
+require './lib/style/table'
+require './lib/style/text'
 
 class Output
-  include Style
-
   MIN_LENGTH = 40
   # basically 7 is a magic number,
   # but we need it to reserve length for service symbols and layout (padding, borders, e.t.c)
@@ -16,7 +15,7 @@ class Output
   def self.search_statistic(search)
     table = Terminal::Table.new title:
                                   Style::Text.title('statistic', color: :light_green)
-    Style::Table.config_search(table, @search_result_table_width)
+    Style::Table.config(table, @search_result_table_width)
     table << [Style::Text.header('total_quantity', color: :green),
               Style::Text.value(search.total_quantity)]
     table << [Style::Text.header('request_quantity', color: :green),
@@ -28,7 +27,7 @@ class Output
   # @param [Array<Car>] result
   def self.search_result(result)
     table = result.empty? ? Style::Table.empty_table : fill_search_res(result)
-    Style::Table.config_search(table, @search_result_table_width)
+    Style::Table.config(table, @search_result_table_width)
     puts table
   end
 
