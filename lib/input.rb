@@ -5,7 +5,7 @@ class Input
   def self.param(parameters, message: I18n.t('input.input_request'))
     puts message
     parameters.each do |param|
-      print "\t#{I18n.t('input.input')} #{I18n.t("attributes.#{param.name}").downcase}:"
+      print "\t#{I18n.t("attributes.#{param.name}").capitalize}:"
       begin
         param.value = gets.chomp
       rescue TypeError => e
