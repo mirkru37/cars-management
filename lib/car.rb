@@ -2,7 +2,7 @@
 
 class Car
   DATE_FORMAT = '%d/%m/%y'
-  ATTR_LIST = %w[id make model year odometer price description date_added]
+  ATTR_LIST = %w[id make model year odometer price description date_added].freeze
 
   # @param [String] id
   # @param [String] make
