@@ -95,103 +95,113 @@ Also if you input **wrong** option, the **default** one will be chosen.
 ___
 #### Input
 ```
+Please choose language (uk | en) default: en
+
 Please input search rules(to skip one press enter)
-	 Input make: 
-	 Input model: 
-	 Input year_from: 2017
-	 Input year_to: 
-	 Input price_from: 
-	 Input price_to: 20000
+	Input make:
+	Input model:
+	Input year from:2017
+	Input year to:
+	Input price from:
+	Input price to:20000
 Please input sort option (price | date_added) default: date_added
 price
 Please input sort order (asc | desc) default: desc
 asc
-Chosen sort_by: price sort_order: asc
+Chosen sort option: price sort order: asc
 ```
 #### Output
 ```
-Statistic:
-
-	Total quantity: 3
-
-	Request quantity: 1
-
-Result:
-
-id: 8841f970-330f-11ec-8d3d-0242ac130003
-make: Renault
-model: Megane
-year: 2018
-odometer: 245000
-price: 10500
-description: Car in very good condition, LPG installed
-date_added: 28/09/21
-
-id: 1ec46226-330f-11ec-8d3d-0242ac130003
-make: Ford
-model: Fusion
-year: 2017
-odometer: 65000
-price: 18000
-description: Selling a good car
-date_added: 18/09/21
-
-id: 7073efd8-330f-11ec-8d3d-0242ac130003
-make: Ford
-model: Focus
-year: 2017
-odometer: 103000
-price: 19000
-description: Like new
-date_added: 24/08/21
+x==================================================================x
+|                            Statistic                             |
+x=================================x================================x
+| Cars found                      |                              3 |
+| Request quantity                |                              3 |
+x==================================================================x
+|                              Result                              |
+x======================x===========================================x
+| Field                | Information                               |
+x======================x===========================================x
+| ID                   | 8841f970-330f-11ec-8d3d-0242ac130003      |
+| Make                 | Renault                                   |
+| Model                | Megane                                    |
+| Year                 | 2018                                      |
+| Odometer             | 245000                                    |
+| Price                | 10500.0                                   |
+| Description          | Car in very good condition, LPG installed |
+| Date added           | 28/09/21                                  |
+x======================x===========================================x
+| ID                   | 1ec46226-330f-11ec-8d3d-0242ac130003      |
+| Make                 | Ford                                      |
+| Model                | Fusion                                    |
+| Year                 | 2017                                      |
+| Odometer             | 65000                                     |
+| Price                | 18000.0                                   |
+| Description          | Selling a good car                        |
+| Date added           | 18/09/21                                  |
+x======================x===========================================x
+| ID                   | 7073efd8-330f-11ec-8d3d-0242ac130003      |
+| Make                 | Ford                                      |
+| Model                | Focus                                     |
+| Year                 | 2017                                      |
+| Odometer             | 103000                                    |
+| Price                | 19000.0                                   |
+| Description          | Like new                                  |
+| Date added           | 24/08/21                                  |
+x======================x===========================================x
 ```
 ___
 #### Input
 ```
-Please input search rules(to skip one press enter)
-	 Input make: ford
-	 Input model: 
-	 Input year_from: 1764
-Argument 1764 must be >= 1800 and <= 2021
-	 Input year_from: 
-	 Input year_to: 
-	 Input price_from: -123
-Argument -123.0 must be >= 0 and <= 1.7976931348623157e+308
-	 Input price_from: two thousands
-Argument two thousands is not a number
-	 Input price_from: 
-	 Input price_to: 
-Please input sort option (price | date_added) default: date_added
+Please choose language (uk | en) default: en
+uk
+Будь-ласка введіть правила пошуку(для пропуску нажміть enter)
+	Введіть виробник:ford
+	Введіть модель:
+	Введіть рік від:1764
+Аргумент 1764 повинен бути >= 1800 і <= 2021
+	Введіть рік від:
+	Введіть рік до:
+	Введіть ціна від:-123
+Аргумент -123.0 повинен бути >= 0 і <= 1.7976931348623157e+308
+	Введіть ціна від:дві тисячі
+Аргумент дві тисячі не є число
+	Введіть ціна від:
+	Введіть ціна до:
+Будь-ласка введіть атрибут для сортування (price | date_added) за замовчуванням: date_added
 
-Please input sort order (asc | desc) default: desc
+Будь-ласка введіть порядок сортування (asc | desc) за замовчуванням: desc
 
-Chosen sort_by: date_added sort_order: desc
+Вибрано сортувати за: date_added порядок сортування: desc
 ```
 #### Output
 ```
-Statistic:
-
-	Total quantity: 2
-
-	Request quantity: 4
-
-Result:
-
-id: 1ec46226-330f-11ec-8d3d-0242ac130003
-make: Ford
-model: Fusion
-year: 2017
-odometer: 65000
-price: 18000
-description: Selling a good car
-date_added: 18/09/21
-
-id: 7073efd8-330f-11ec-8d3d-0242ac130003
-make: Ford
-model: Focus
-year: 2017
-odometer: 103000
-price: 19000
-description: Like new
-date_added: 24/08/21
+x=====================================================================x
+|                             Статистика                              |
+x==================================x==================================x
+| Знайдено машин                   |                                2 |
+| Кількість запитів                |                                5 |
+x=====================================================================x
+|                              Результат                              |
+x==============================x======================================x
+| Поле                         | Інформація                           |
+x==============================x======================================x
+| ID                           | 1ec46226-330f-11ec-8d3d-0242ac130003 |
+| Виробник                     | Ford                                 |
+| Модель                       | Fusion                               |
+| Рік                          | 2017                                 |
+| Одометер                     | 65000                                |
+| Ціна                         | 18000.0                              |
+| Опис                         | Selling a good car                   |
+| Дата додавання               | 18/09/21                             |
+x==============================x======================================x
+| ID                           | 7073efd8-330f-11ec-8d3d-0242ac130003 |
+| Виробник                     | Ford                                 |
+| Модель                       | Focus                                |
+| Рік                          | 2017                                 |
+| Одометер                     | 103000                               |
+| Ціна                         | 19000.0                              |
+| Опис                         | Like new                             |
+| Дата додавання               | 24/08/21                             |
+x==============================x======================================x
 ```

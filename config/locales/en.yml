@@ -1,0 +1,44 @@
+en:
+  attributes:
+    id: 'ID'
+    make: 'Make'
+    model: 'Model'
+    year: 'Year'
+    year_from: 'Year from'
+    year_to: 'Year to'
+    odometer: 'Odometer'
+    price: 'Price'
+    price_from: 'Price from'
+    price_to: 'Price to'
+    description: 'Description'
+    date_added: 'Date added'
+    sort_order: 'Sort order'
+    sort_option: 'Sort option'
+  titles:
+    statistic: 'Statistic'
+    result: 'Result'
+    empty_table: 'Table is empty'
+  headers:
+    field: 'Field'
+    information: 'Information'
+    total_quantity: 'Cars found'
+    request_quantity: 'Request quantity'
+  input:
+    input_request: 'Please input'
+    wrong_option: 'Wrong option!!!'
+    request:
+      rules: 'Please input next search rules (to skip one press enter)'
+      sort_option: 'Please input sort option'
+      sort_order: 'Please input sort order'
+      language: 'Please choose language'
+  actions:
+    chosen: 'Chosen'
+  words:
+    argument: 'Argument'
+    integer: 'integer'
+    number: 'number'
+    and: 'and'
+  sentences:
+    must_be: 'must be'
+    is_not: 'is not a'
+  default: 'default'

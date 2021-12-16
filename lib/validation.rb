@@ -6,11 +6,13 @@ class Validation
   # @return [Integer]
   def self.year(value, max_year: DateTime.now.year, min_year: 1800)
     return value if value.to_s.strip.empty?
-    raise TypeError, "Argument #{value} is not a int" unless int?(value)
+    unless int?(value)
+      raise TypeError, "#{I18n.t('words.argument')} #{value}  #{I18n.t('sentences.is_not')} #{I18n.t('words.integer')}"
+    end
 
     value = value.to_i
     unless value >= min_year && value <= max_year
-      raise TypeError, "Argument #{value} must be >= #{min_year} and <= #{max_year}"
+      raise TypeError, "#{I18n.t('words.argument')} #{value} #{I18n.t('sentences.must_be')} >= #{min_year} #{I18n.t('words.and')} <= #{max_year}"
     end
 
     value
@@ -21,11 +23,13 @@ class Validation
   # @return [Float]
   def self.price(value, max_price: Float::MAX, min_price: 0)
     return value if value.to_s.strip.empty?
-    raise TypeError, "Argument #{value} is not a number" unless number?(value)
+    unless number?(value)
+      raise TypeError, "#{I18n.t('words.argument')} #{value} #{I18n.t('sentences.is_not')} #{I18n.t('words.number')}"
+    end
 
     value = value.to_f.round(2)
     unless value >= min_price && value <= max_price
-      raise TypeError, "Argument #{value} must be >= #{min_price} and <= #{max_price}"
+      raise TypeError, "#{I18n.t('words.argument')} #{value} #{I18n.t('sentences.must_be')} >= #{min_price} #{I18n.t('words.and')} <= #{max_price}"
     end
 
     value

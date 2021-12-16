@@ -1,8 +1,9 @@
+# frozen_string_literal: true
+# 
 class Car
-  DATE_FORMAT = '%d/%m/%y'.freeze
-
-  attr_reader :id, :make, :model, :year, :odometer, :price, :description, :date_added
-
+  DATE_FORMAT = '%d/%m/%y'
+  ATTR_LIST = %w[id make model year odometer price description date_added]
+  
   # @param [String] id
   # @param [String] make
   # @param [String] model
@@ -22,11 +23,6 @@ class Car
     @date_added = date_added.instance_of?(String) ? DateTime.strptime(date_added, DATE_FORMAT) : date_added
   end
 
-  def to_s
-    ["id: #{@id}", "make: #{@make}", "model: #{model}", "year: #{@year}", "odometer: #{@odometer}", "price: #{@price}",
-     "description: #{@description}", "date_added: #{@date_added.strftime(DATE_FORMAT)}"].join("\n")
-  end
-
   # @param [SearchRule] rule
   # @return [TrueClass, FalseClass]
   def fit_rule?(rule)
@@ -42,5 +38,21 @@ class Car
     else
       val.to_s.casecmp?(rule.value.to_s)
     end
+  end
+
+  # @return [Hash]
+  def attributes
+    ATTR_LIST.map do |attribute|
+      value = instance_variable_get("@#{attribute}")
+      [attribute, value]
+    end.to_h
+  end
+
+  # @return [Integer]
+  def max_attr_len
+    attributes_ = attributes
+    max_key = attributes_.keys.map { |key| I18n.t("attributes.#{key}").length }.max
+    max_value = attributes_.values.map { |value| value.to_s.length }.max
+    max_key + max_value
   end
 end

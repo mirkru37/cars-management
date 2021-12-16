@@ -1,0 +1,44 @@
+uk:
+  attributes:
+    id: 'ID'
+    make: 'Виробник'
+    model: 'Модель'
+    year: 'Рік'
+    year_from: 'Рік від'
+    year_to: 'Рік до'
+    odometer: 'Одометер'
+    price: 'Ціна'
+    price_from: 'Ціна від'
+    price_to: 'Ціна до'
+    description: 'Опис'
+    date_added: 'Дата додавання'
+    sort_order: 'Порядок сортування'
+    sort_option: 'Сортувати за'
+  titles:
+    statistic: 'Статистика'
+    result: 'Результат'
+    empty_table: 'Тут нічого немає'
+  headers:
+    field: 'Поле'
+    information: 'Інформація'
+    total_quantity: 'Знайдено машин'
+    request_quantity: 'Кількість запитів'
+  input:
+    input_request: 'Будь ласка, введіть'
+    wrong_option: 'Неправильний вибір!!!'
+    request:
+      rules: 'Будь ласка, введіть наступні правила пошуку (для пропуску нажміть enter)'
+      sort_option: 'Будь ласка, введіть атрибут для сортування'
+      sort_order: 'Будь ласка, введіть порядок сортування'
+      language: 'Будь ласка, виберіть мову'
+  actions:
+    chosen: 'Вибрано'
+  words:
+    argument: 'Аргумент'
+    integer: 'цілим числом'
+    number: 'числом'
+    and: 'і'
+  sentences:
+    must_be: 'повинен бути'
+    is_not: 'не є'
+  default: 'за замовчуванням'
