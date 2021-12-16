@@ -14,21 +14,20 @@ en:
     date_added: 'Date added'
     sort_order: 'Sort order'
     sort_option: 'Sort option'
-  tittles:
+  titles:
     statistic: 'Statistic'
     result: 'Result'
     empty_table: 'Table is empty'
   headers:
     field: 'Field'
     information: 'Information'
-    total_quantity: 'Total quantity'
+    total_quantity: 'Cars found'
     request_quantity: 'Request quantity'
   input:
-    input: 'Input'
     input_request: 'Please input'
     wrong_option: 'Wrong option!!!'
     request:
-      rules: 'Please input search rules(to skip one press enter)'
+      rules: 'Please input next search rules (to skip one press enter)'
       sort_option: 'Please input sort option'
       sort_order: 'Please input sort order'
       language: 'Please choose language'

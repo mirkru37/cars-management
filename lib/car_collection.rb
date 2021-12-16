@@ -6,7 +6,6 @@ class CarCollection
   # @param [Array<Hash>, Array<Car>] all_cars
   def initialize(all_cars = [])
     @all_cars = init_cars(all_cars)
-    @min_attr_length = 20
   end
 
   # @return [Array<Car>]
