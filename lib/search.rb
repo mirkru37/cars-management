@@ -16,17 +16,26 @@ class Search
     @rules = rules
   end
 
-  # @param [Array<SearchRule>] other
+  # @param [Array<SearchRule>] other_rules
   # @return [TrueClass, FalseClass]
-  def equal_rules?(other)
-    return other.empty? if @rules.empty?
-    return false if other.length != @rules.length
+  def equal_rules?(other_rules)
+    return other_rules.empty? if @rules.empty?
+    return false if other_rules.length != @rules.length
 
     @rules.all? do |rule|
-      i = other.index { |other_rule| other_rule.name == rule.name }
-      return false if i.nil?
-
-      rule.value.instance_of?(String) ? other[i].value.casecmp(rule.value).zero? : other[i].value == rule.value
+      contains?(other_rules, rule)
     end
+  end
+
+  private
+
+  # @param [Array<SearchRule>] rules_arr
+  # @param [SearchRule] rule
+  # @return [TrueClass, FalseClass]
+  def equal?(rules_arr, rule)
+    i = rules_arr.index { |other_rule| other_rule.name == rule.name }
+    return false if i.nil?
+
+    rule.value.instance_of?(String) ? rules_arr[i].value.casecmp(rule.value).zero? : rules_arr[i].value == rule.value
   end
 end

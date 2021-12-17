@@ -27,17 +27,10 @@ class Car
   # @return [TrueClass, FalseClass]
   def fit_rule?(rule)
     name = rule.name.split('_')
-    val =  instance_variable_get("@#{name[0]}")
-    return false if val.nil?
+    value = instance_variable_get("@#{name[0]}")
+    return false if value.nil?
 
-    case name[-1]
-    when 'to'
-      val <= rule.value
-    when 'from'
-      val >= rule.value
-    else
-      val.to_s.casecmp?(rule.value.to_s)
-    end
+    compare_value(value, rule.value, name)
   end
 
   # @return [Hash]
@@ -54,5 +47,18 @@ class Car
     max_key = attributes_.keys.map { |key| I18n.t("attributes.#{key}").length }.max
     max_value = attributes_.values.map { |value| value.to_s.length }.max
     max_key + max_value
+  end
+
+  private
+
+  def compare_value(self_value, value, name)
+    case name[-1]
+    when 'to'
+      self_value <= value
+    when 'from'
+      self_value >= value
+    else
+      self_value.to_s.casecmp?(value.to_s)
+    end
   end
 end
