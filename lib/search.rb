@@ -32,10 +32,19 @@ class Search
   # @param [Array<SearchRule>] rules_arr
   # @param [SearchRule] rule
   # @return [TrueClass, FalseClass]
-  def equal?(rules_arr, rule)
-    i = rules_arr.index { |other_rule| other_rule.name == rule.name }
+  def contains?(rules_arr, rule)
+    i = rule_index(rules_arr, rule)
     return false if i.nil?
+    return rules_arr[i].value.to_s.casecmp(rule.value).zero? if rule.value.instance_of?(String)
 
-    rule.value.instance_of?(String) ? rules_arr[i].value.casecmp(rule.value).zero? : rules_arr[i].value == rule.value
+    rules_arr[i].value == rule.value
+  end
+
+  # @param [Array<SearchRule>] rules
+  # @return [Integer, nil]
+  def rule_index(rules, rule)
+    rules.index do |other_rule|
+      other_rule.name == rule.name
+    end
   end
 end

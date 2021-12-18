@@ -30,7 +30,7 @@ class Car
     value = instance_variable_get("@#{name[0]}")
     return false if value.nil?
 
-    compare_value(value, rule.value, name)
+    compare_values(value, rule.value, name[-1])
   end
 
   # @return [Hash]
@@ -51,14 +51,18 @@ class Car
 
   private
 
-  def compare_value(self_value, value, name)
-    case name[-1]
+  # @param [Object] self_value
+  # @param [Object] value
+  # @param [String] name
+  # @return [TrueClass, FalseClass]
+  def compare_values(self_value, value, name)
+    case name
     when 'to'
       self_value <= value
     when 'from'
       self_value >= value
     else
-      self_value.to_s.casecmp?(value.to_s)
+      self_value.casecmp?(value)
     end
   end
 end
