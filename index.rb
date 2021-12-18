@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/search_rule'
 require './lib/search_counter'
 require './lib/input'
@@ -34,9 +36,9 @@ sort_order = Input.option(SORT_ORDER, default: 'desc', message: I18n.t('input.re
 puts "#{I18n.t('actions.chosen')} #{I18n.t('attributes.sort_option').downcase}: #{sort_by} " \
      "#{I18n.t('attributes.sort_order').downcase}: #{sort_order}"
 filtered = CarCollection.new(cars.filter_by_rules(rules))
-res = filtered.sort(sort_by: sort_by, sort_order: sort_order)
+result = filtered.sort(sort_by: sort_by, sort_order: sort_order)
 
-search = Search.new(res.length, 1, rules)
+search = Search.new(result.length, 1, rules)
 search.request_quantity = SearchCounter.call(searches, search)
 searches.append(search)
 
@@ -44,4 +46,4 @@ database.dump('searches', searches.to_hash['searches'])
 
 Output.search_result_table_width = cars.max_attr_len
 Output.search_statistic(search)
-Output.search_result(res)
+Output.search_result(result)

@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 require 'fileutils'
 
 # database controller for YAML
 class Database
-  DB_PATH = 'db'.freeze
+  DB_PATH = 'db'
 
   # @param [FalseClass, TrueClass] create_if_not_exist
   def initialize(create_if_not_exist: true)

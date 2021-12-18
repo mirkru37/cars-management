@@ -35,8 +35,8 @@ If you want **to skip** one, leave an **empty** field.
   >Input make: ~~Ford Audi~~
 - model - takes one car model
   >Input model: Focus 3
-  > 
-  >Input model: ~~Mondeo Focus~~ 
+  >
+  >Input model: ~~Mondeo Focus~~
 - year_from - takes the smallest year of searchable cars *
 - year_to - takes the biggest year of searchable cars *
   >Input year: 2015
@@ -52,7 +52,7 @@ If you want **to skip** one, leave an **empty** field.
   >
   >Input price: ~~twenty thousands~~
 
-After that you can input sort option. If you want **to skip**, 
+After that you can input sort option. If you want **to skip**,
 leave an **empty** field, and the **default** one will be chosen.
 Also if you input **wrong** option, the **default** one will be chosen.
 
