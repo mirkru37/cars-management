@@ -26,11 +26,11 @@ class Car
   # @param [SearchRule] rule
   # @return [TrueClass, FalseClass]
   def fit_rule?(rule)
-    name = rule.name.split('_')
-    value = instance_variable_get("@#{name[0]}")
+    name, condition = rule.name.split('_')
+    value = instance_variable_get("@#{name}")
     return false if value.nil?
 
-    compare_values(value, rule.value, name[-1])
+    compare_values(value, rule.value, condition)
   end
 
   # @return [Hash]
