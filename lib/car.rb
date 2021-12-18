@@ -4,23 +4,11 @@ class Car
   DATE_FORMAT = '%d/%m/%y'
   ATTR_LIST = %w[id make model year odometer price description date_added].freeze
 
-  # @param [String] id
-  # @param [String] make
-  # @param [String] model
-  # @param [Integer] year
-  # @param [Integer] odometer
-  # @param [Float, Integer] price
-  # @param [String] description
-  # @param [DateTime, String] date_added
-  def initialize(id, make, model, year, odometer, price, description, date_added)
-    @id = id
-    @make = make
-    @model = model
-    @year = year
-    @odometer = odometer
-    @price = price.to_f
-    @description = description
-    @date_added = date_added.instance_of?(String) ? DateTime.strptime(date_added, DATE_FORMAT) : date_added
+  def initialize(**kwargs)
+    ATTR_LIST.each do |attr|
+      kwargs[attr] = format_attribute(kwargs[attr], attr)
+      instance_variable_set("@#{attr}", kwargs[attr])
+    end
   end
 
   # @param [SearchRule] rule
@@ -63,6 +51,17 @@ class Car
       self_value >= value
     else
       self_value.casecmp?(value)
+    end
+  end
+
+  # @param [Object] value
+  # @param [String] attr_name
+  def format_attribute(value, attr_name)
+    case attr_name
+    when 'date_added'
+      value.instance_of?(String) ? DateTime.strptime(value, DATE_FORMAT) : value
+    else
+      value
     end
   end
 end

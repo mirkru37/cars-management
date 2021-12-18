@@ -7,8 +7,10 @@ require './lib/i18n_config'
 require './lib/output'
 require './lib/database'
 require './lib/car'
-require './lib/car_collection'
 require './lib/search_collection'
+require './lib/controller/cars_controller'
+require './lib/filter/cars_filter'
+require './lib/sorter/cars_sort'
 require 'yaml'
 require 'i18n'
 
@@ -20,7 +22,7 @@ database = Database.new
 rules = [SearchRule.new('make'), SearchRule.new('model'),
          SearchRule.year('year_from'), SearchRule.year('year_to'),
          SearchRule.price('price_from'), SearchRule.price('price_to')]
-cars = CarCollection.new(database.load('db'))
+cars = Controller::CarsController.init(database.load('db'))
 searches = SearchCollection.new(database.load('searches'))
 
 I18nConfig.init
@@ -35,8 +37,8 @@ sort_by = Input.option(SORT_BY, default: 'date_added', message: I18n.t('input.re
 sort_order = Input.option(SORT_ORDER, default: 'desc', message: I18n.t('input.request.sort_order'))
 puts "#{I18n.t('actions.chosen')} #{I18n.t('attributes.sort_option').downcase}: #{sort_by} " \
      "#{I18n.t('attributes.sort_order').downcase}: #{sort_order}"
-filtered = CarCollection.new(cars.filter_by_rules(rules))
-result = filtered.sort(sort_by: sort_by, sort_order: sort_order)
+filtered = Filter::CarsFilter.filter_by_rules(cars, rules)
+result = Sorter::CarsSort.sort(filtered, sort_by: sort_by, sort_order: sort_order)
 
 search = Search.new(result.length, 1, rules)
 search.request_quantity = SearchCounter.call(searches, search)
@@ -44,6 +46,6 @@ searches.append(search)
 
 database.dump('searches', searches.to_hash['searches'])
 
-Output.search_result_table_width = cars.max_attr_len
+Output.search_result_table_width = Controller::CarsController.max_attr_len(cars)
 Output.search_statistic(search)
 Output.search_result(result)

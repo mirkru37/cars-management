@@ -28,12 +28,6 @@ class SearchCollection
     end
   end
 
-  # @param [Integer] idn
-  # @return [Search]
-  def [](idn)
-    @searches[idn]
-  end
-
   private
 
   # @param [Array<Hash>] searches
