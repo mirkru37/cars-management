@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Sorter
-  class CarsSort
+  class Cars
     class << self
       # @param [Array<Car>] all_cars
       # @param [String] sort_by

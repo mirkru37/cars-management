@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module Controller
-  class CarsController
+  class Cars
     class << self
       # @param [Array<Hash>] all_cars
       def init(all_cars)
