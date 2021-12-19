@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require './lib/hashify'
 
 class Search
@@ -14,23 +16,35 @@ class Search
     @rules = rules
   end
 
-  # @param [Array<SearchRule>] other
+  # @param [Array<SearchRule>] other_rules
   # @return [TrueClass, FalseClass]
-  def equal_rules?(other)
-    return other.empty? if @rules.empty?
-    return false if other.length != @rules.length
+  def equal_rules?(other_rules)
+    return other_rules.empty? if @rules.empty?
+    return false if other_rules.length != @rules.length
 
     @rules.all? do |rule|
-      i = other.index do |other_rule|
-        other_rule.name == rule.name
-      end
-      return false if i.nil?
+      contains?(other_rules, rule)
+    end
+  end
 
-      if other[i].value.instance_of?(String) || rule.value.instance_of?(String)
-        other[i].value.to_s.downcase == rule.value.to_s.downcase
-      else
-        other[i].value == rule.value
-      end
+  private
+
+  # @param [Array<SearchRule>] rules_arr
+  # @param [SearchRule] rule
+  # @return [TrueClass, FalseClass]
+  def contains?(rules_arr, rule)
+    i = rule_index(rules_arr, rule)
+    return false if i.nil?
+    return rules_arr[i].value.to_s.casecmp(rule.value).zero? if rule.value.instance_of?(String)
+
+    rules_arr[i].value == rule.value
+  end
+
+  # @param [Array<SearchRule>] rules
+  # @return [Integer, nil]
+  def rule_index(rules, rule)
+    rules.index do |other_rule|
+      other_rule.name == rule.name
     end
   end
 end

@@ -1,0 +1,23 @@
+name: Install dependencies and run linters
+
+on:
+  pull_request:
+    branches: [ main ]
+jobs:
+  run-lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run security checks
+        run: |
+          bundle exec bundler-audit
+          bundle exec bundler-leak
+      - name: Run linters
+        run: |
+          bundle exec rubocop

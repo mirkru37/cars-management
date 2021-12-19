@@ -3,7 +3,7 @@
 module Style
   class Text
     class << self
-      # @param [text] attr
+      # @param [String] text
       def attribute_(text, color: :light_magenta)
         I18n.t("attributes.#{text}").to_s.colorize(color)
       end
@@ -25,4 +25,3 @@ module Style
     end
   end
 end
-

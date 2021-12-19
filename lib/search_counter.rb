@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class SearchCounter
   class << self
     # @param [SearchCollection] searches

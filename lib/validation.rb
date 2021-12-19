@@ -1,48 +1,60 @@
+# frozen_string_literal: true
+
 require 'date'
 
 class Validation
-  # @param [Integer] max_year
-  # @param [Integer] min_year
-  # @return [Integer]
-  def self.year(value, max_year: DateTime.now.year, min_year: 1800)
-    return value if value.to_s.strip.empty?
-    unless int?(value)
-      raise TypeError, "#{I18n.t('words.argument')} #{value}  #{I18n.t('sentences.is_not')} #{I18n.t('words.integer')}"
+  class << self
+    # @param [Integer] max_year
+    # @param [Integer] min_year
+    # @return [Integer]
+    def year(value, max_year: DateTime.now.year, min_year: 1800)
+      return value if value.to_s.strip.empty?
+
+      value = handle_int(value)
+      handle_range(value, max_year, min_year)
+      value
     end
 
-    value = value.to_i
-    unless value >= min_year && value <= max_year
-      raise TypeError, "#{I18n.t('words.argument')} #{value} #{I18n.t('sentences.must_be')} >= #{min_year} #{I18n.t('words.and')} <= #{max_year}"
+    # @param [Float] max_price
+    # @param [Float] min_price
+    # @return [Float]
+    def price(value, max_price: Float::MAX, min_price: 0)
+      return value if value.to_s.strip.empty?
+
+      value = handle_float(value)
+      handle_range(value, max_price, min_price)
+      value
     end
 
-    value
-  end
+    private
 
-  # @param [Float] max_price
-  # @param [Float] min_price
-  # @return [Float]
-  def self.price(value, max_price: Float::MAX, min_price: 0)
-    return value if value.to_s.strip.empty?
-    unless number?(value)
-      raise TypeError, "#{I18n.t('words.argument')} #{value} #{I18n.t('sentences.is_not')} #{I18n.t('words.number')}"
+    # @param [Object] value
+    # @return [Integer, nil]
+    def handle_int(value)
+      Integer(value)
+    rescue ArgumentError
+      error_msg = "#{I18n.t('words.argument')} #{value}"\
+                  "  #{I18n.t('sentences.is_not')} #{I18n.t('words.integer')}"
+      raise TypeError, error_msg
     end
 
-    value = value.to_f.round(2)
-    unless value >= min_price && value <= max_price
-      raise TypeError, "#{I18n.t('words.argument')} #{value} #{I18n.t('sentences.must_be')} >= #{min_price} #{I18n.t('words.and')} <= #{max_price}"
+    # @param [Object] value
+    # @return [Float, Integer]
+    def handle_float(value)
+      Float(value).round(2)
+    rescue ArgumentError
+      error_msg = "#{I18n.t('words.argument')} #{value}"\
+                  " #{I18n.t('sentences.is_not')} #{I18n.t('words.number')}"
+      raise TypeError, error_msg
     end
 
-    value
-  end
-
-  def self.number?(val)
-    Float(val)
-  rescue ArgumentError
-    false
-
-  end
-
-  def self.int?(val)
-    val.to_i.to_s == val
+    # @param [Float, Integer] value
+    # @param [Float, Integer] max
+    # @param [Float, Integer] min
+    def handle_range(value, max, min)
+      error_msg = "#{I18n.t('words.argument')} #{value} #{I18n.t('sentences.must_be')}"\
+                  " >= #{min} #{I18n.t('words.and')} <= #{max}"
+      raise TypeError, error_msg unless value >= min && value <= max
+    end
   end
 end

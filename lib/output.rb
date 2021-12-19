@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'terminal-table'
 require 'colorize'
 require './lib/style/table'
@@ -35,7 +37,6 @@ class Output
     # @param [Integer] val
     def search_result_table_width=(val)
       val = [val, MIN_LENGTH].max
-
       @search_result_table_width = val + ADDITIONAL_SYMBOLS
     end
 

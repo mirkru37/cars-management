@@ -1,9 +1,9 @@
 # frozen_string_literal: true
-# 
+
 class Car
   DATE_FORMAT = '%d/%m/%y'
-  ATTR_LIST = %w[id make model year odometer price description date_added]
-  
+  ATTR_LIST = %w[id make model year odometer price description date_added].freeze
+
   # @param [String] id
   # @param [String] make
   # @param [String] model
@@ -26,18 +26,11 @@ class Car
   # @param [SearchRule] rule
   # @return [TrueClass, FalseClass]
   def fit_rule?(rule)
-    name = rule.name.split('_')
-    val =  instance_variable_get("@#{name[0]}")
-    return false if val.nil?
+    name, condition = rule.name.split('_')
+    value = instance_variable_get("@#{name}")
+    return false if value.nil?
 
-    case name[-1]
-    when 'to'
-      val <= rule.value
-    when 'from'
-      val >= rule.value
-    else
-      val.to_s.casecmp?(rule.value.to_s)
-    end
+    compare_values(value, rule.value, condition)
   end
 
   # @return [Hash]
@@ -54,5 +47,22 @@ class Car
     max_key = attributes_.keys.map { |key| I18n.t("attributes.#{key}").length }.max
     max_value = attributes_.values.map { |value| value.to_s.length }.max
     max_key + max_value
+  end
+
+  private
+
+  # @param [Object] self_value
+  # @param [Object] value
+  # @param [String] condition
+  # @return [TrueClass, FalseClass]
+  def compare_values(self_value, value, condition)
+    case condition
+    when 'to'
+      self_value <= value
+    when 'from'
+      self_value >= value
+    else
+      self_value.casecmp?(value)
+    end
   end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class I18nConfig
   class << self
     def init
