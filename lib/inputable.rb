@@ -1,4 +1,4 @@
-# frozen_string_literal: true
+# frozen_string_literal: false
 
 class Inputable
   attr_reader :name
@@ -7,6 +7,6 @@ class Inputable
   # @param [String] name
   def initialize(name)
     @name = name
-    @value = + ''
+    @value = ''
   end
 end

@@ -41,10 +41,10 @@ class Car
 
   # @param [Object] self_value
   # @param [Object] value
-  # @param [String] name
+  # @param [String] condition
   # @return [TrueClass, FalseClass]
-  def compare_values(self_value, value, name)
-    case name
+  def compare_values(self_value, value, condition)
+    case condition
     when 'to'
       self_value <= value
     when 'from'
