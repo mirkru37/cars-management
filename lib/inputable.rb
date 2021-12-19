@@ -7,6 +7,6 @@ class Inputable
   # @param [String] name
   def initialize(name)
     @name = name
-    @value = + ''
+    @value = ''
   end
 end
