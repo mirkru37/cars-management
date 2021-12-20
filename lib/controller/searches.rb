@@ -16,12 +16,24 @@ module Controller
       end
 
       # @param [Array<Search>] searches
+      # @param [Search] search
+      def append(searches, search)
+        if search.request_quantity == 1
+          searches << search
+        else
+          replace(searches, search)
+        end
+      end
+
+      # @param [Array<Search>] searches
       # @param [Search] other
       def index(searches, other)
         searches.index do |search|
           search.equal_rules?(other.rules)
         end
       end
+
+      private
 
       # @param [Array<Search>] searches
       # @param [Search] search

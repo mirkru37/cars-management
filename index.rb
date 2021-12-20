@@ -38,16 +38,12 @@ sort_by = Input.option(SORT_BY, default: 'date_added', message: I18n.t('input.re
 sort_order = Input.option(SORT_ORDER, default: 'desc', message: I18n.t('input.request.sort_order'))
 puts "#{I18n.t('actions.chosen')} #{I18n.t('attributes.sort_option').downcase}: #{sort_by} " \
      "#{I18n.t('attributes.sort_order').downcase}: #{sort_order}"
-filtered = Filter::Cars.filter_by_rules(cars, rules)
-result = Sorter::Cars.sort(filtered, sort_by: sort_by, sort_order: sort_order)
+result = Filter::Cars.filter_by_rules(cars, rules)
+result = Sorter::Cars.sort(result, sort_by: sort_by, sort_order: sort_order)
 
 search = Search.new(result.length, 1, rules)
 search.request_quantity = SearchCounter.call(searches, search)
-if search.request_quantity == 1
-  searches << search
-else
-  Controller::Searches.replace(searches, search)
-end
+Controller::Searches.append(searches, search)
 database.dump('searches', searches.map(&:to_hash))
 
 Output.search_result_table_width = Controller::Cars.max_attr_len(cars)
