@@ -48,7 +48,7 @@ class Output
         table.headings = [Style::Text.header('field'), Style::Text.header('information')]
         result.each do |item|
           item.attributes.each do |key, value|
-            value = value.strftime(Car::DATE_FORMAT) if value.instance_of?(DateTime)
+            value = value.strftime(Models::Car::DATE_FORMAT) if value.instance_of?(DateTime)
             table << [Style::Text.attribute_(key), Style::Text.value(value, color: :magenta)]
           end
           table << :separator
