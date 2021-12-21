@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
-module Operations
-  class Car
+module Controller
+  class Cars
     class << self
       # @param [Array<Hash>] cars
-      def init_cars_array(cars)
+      def init(cars)
         cars.map do |car|
-          Models::Car.new(**car)
+          Car.new(**car)
         end
       end
 

@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-module Filters
-  class Car
+module Filter
+  class Cars
     class << self
       # @param [Array<Car>] cars
       # @param [Array<SearchRule>] rules

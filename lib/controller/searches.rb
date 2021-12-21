@@ -1,17 +1,17 @@
 # frozen_string_literal: true
 
-module Operations
-  class Search
+module Controller
+  class Searches
     class << self
       # @param [Array<Hash>] searches
-      def init_searches_array(searches)
+      def init(searches)
         searches.map do |search|
           search['rules'].map! do |rule|
-            rule_ = Models::SearchRule.new(rule['name'])
+            rule_ = SearchRule.new(rule['name'])
             rule_.value = rule['value']
             rule_
           end
-          Models::Search.new(*search.values)
+          Search.new(*search.values)
         end
       end
 
@@ -23,16 +23,6 @@ module Operations
         else
           replace(searches, search)
         end
-      end
-
-      # @param [Array<Search>] searches
-      # @param [Search] search
-      # @return [Integer]
-      def count(searches, search)
-        i = index(searches, search)
-        return search.request_quantity if i.nil?
-
-        search.request_quantity + searches[i].request_quantity
       end
 
       # @param [Array<Search>] searches
