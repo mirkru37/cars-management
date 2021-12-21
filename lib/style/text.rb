@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'i18n'
+require 'colorize'
+
 module Style
   class Text
     class << self
