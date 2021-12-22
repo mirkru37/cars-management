@@ -14,7 +14,7 @@ module Output
         if option.between?(1, items.length)
           items[option - 1].call(**kwargs)
         else
-          puts error_message
+          puts error_message.colorize(:light_red)
           show(items, title: title, error_message: error_message, **kwargs)
         end
       end

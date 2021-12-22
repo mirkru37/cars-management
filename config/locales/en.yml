@@ -18,14 +18,16 @@ en:
     statistic: 'Statistic'
     result: 'Result'
     empty_table: 'Table is empty'
+    main: 'Main menu'
   headers:
     field: 'Field'
     information: 'Information'
     total_quantity: 'Cars found'
     request_quantity: 'Request quantity'
+    help: 'Help'
   input:
     input_request: 'Please input'
-    wrong_option: 'Wrong option!!!'
+    wrong_option: 'Oops, seems like there is no such an option. Try again.'
     request:
       rules: 'Please input next search rules (to skip one press enter)'
       sort_option: 'Please input sort option'
@@ -43,8 +45,20 @@ en:
     must_be: 'must be'
     is_not: 'is not a'
   default: 'default'
+  welcome: 'Welcome to car-management. Search for any car of your dreams.'
+  menu:
+    search_car: 'Search new cars'
+    show_all_cars: 'Show available cars'
+    help: 'Help'
+    change_language: 'Change language'
+    exit: 'Exit'
   help:
     questions:
-      use: 'dsfsdf'
+      search: 'How i supposed to search a car?'
+      show_all: 'Can i see the all available cars?'
     answers:
-      use: 'asdsaf'
+      search: "Just chose fist option in main menu by entering '1' in console,\n
+               and then fill the rules as you want."
+      show_all: "And answer is YES, YOU CAN!!\n
+                 Just enter '2' in console and we promise,\n
+                 you will see the in a flash."
