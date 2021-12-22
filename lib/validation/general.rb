@@ -1,4 +1,4 @@
-#frozen_string_leteral: true
+# frozen_string_literal: true
 
 module Validation
   class General
@@ -34,4 +34,3 @@ module Validation
     end
   end
 end
-
