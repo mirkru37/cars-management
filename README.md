@@ -13,14 +13,29 @@ ruby index.rb
 ```
 
 # Usage
-After the start of the application, you need to fill in search rules **one by one**.
-If you want **to skip** one, leave an **empty** field.
+After the start of the application, you need to choose menu option, of your choice.
+
+```
+x=========================x
+|        Main menu        |
+x===x=====================x
+| 1 | Search new cars     |
+| 2 | Show available cars |
+| 3 | Help                |
+| 4 | Change language     |
+| 5 | Exit                |
+x===x=====================x
+```
+
+## Search new cars
+Here you can fill in search rules one by one.
+If you want to skip one, leave an empty field.
 
 **Rules are case insensitive**
 
 **Rules marked with * require valid input data**
 
-**Statistic** is stored in *data/searches.yml*
+**Statistic is stored in *data/searches.yml***
 
 ### Table of validation
 | Field  | Required value |
@@ -88,91 +103,110 @@ Also if you input **wrong** option, the **default** one will be chosen.
       - name: price_to
         value: 20000.0
 ```
+## Show available cars
+Here you will be showed a list of all available cars
 
+## Help
+Here you can see some hints that could help you to deal
+with application
+```
+x=====================================================================================================x
+|                                                Help                                                 |
+x===================================x=================================================================x
+| How i supposed to search a car?   | Just chose fist option in main menu by entering '1' in console, |
+|                                   |  and then fill the rules as you want.                           |
+| Can i see the all available cars? | And answer is YES, YOU CAN!!                                    |
+|                                   |  Just enter '2' in console and we promise,                      |
+|                                   |  you will see the in a flash.                                   |
+x===================================x=================================================================x
+```
+
+## Change language
+For now only Ukrainian an English languages are supported
+
+## Exit
+Leave the application
 ### Example
 
 ![Home Page](screenshots/usage_cast.gif)
 ___
 #### Input
 ```
-Please choose language (uk | en) default: en
-
-Please input search rules(to skip one press enter)
-	Input make:
-	Input model:
-	Input year from:2017
-	Input year to:
-	Input price from:
-	Input price to:20000
-Please input sort option (price | date_added) default: date_added
-price
-Please input sort order (asc | desc) default: desc
-asc
-Chosen sort option: price sort order: asc
+Welcome to car-management. Search for any car of your dreams.
+x=========================x
+|        Main menu        |
+x===x=====================x
+| 1 | Search new cars     |
+| 2 | Show available cars |
+| 3 | Help                |
+| 4 | Change language     |
+| 5 | Exit                |
+x===x=====================x
+--> 3
+x=====================================================================================================x
+|                                                Help                                                 |
+x===================================x=================================================================x
+| How i supposed to search a car?   | Just chose fist option in main menu by entering '1' in console, |
+|                                   |  and then fill the rules as you want.                           |
+| Can i see the all available cars? | And answer is YES, YOU CAN!!                                    |
+|                                   |  Just enter '2' in console and we promise,                      |
+|                                   |  you will see the in a flash.                                   |
+x===================================x=================================================================x
+x=========================x
+|        Main menu        |
+x===x=====================x
+| 1 | Search new cars     |
+| 2 | Show available cars |
+| 3 | Help                |
+| 4 | Change language     |
+| 5 | Exit                |
+x===x=====================x
+--> 4
+Please choose language (uk | en)default: en
+uk
+x=======================x
+|     Головне меню      |
+x===x===================x
+| 1 | Пошук машин       |
+| 2 | Показати доступні |
+| 3 | Справка           |
+| 4 | Змінити мову      |
+| 5 | Вихід             |
+x===x===================x
+--> 5
+Дякуємо, що використовуєте наш сервіс. До побачення!
 ```
-#### Output
-```
-x==================================================================x
-|                            Statistic                             |
-x=================================x================================x
-| Cars found                      |                              3 |
-| Request quantity                |                              3 |
-x==================================================================x
-|                              Result                              |
-x======================x===========================================x
-| Field                | Information                               |
-x======================x===========================================x
-| ID                   | 8841f970-330f-11ec-8d3d-0242ac130003      |
-| Make                 | Renault                                   |
-| Model                | Megane                                    |
-| Year                 | 2018                                      |
-| Odometer             | 245000                                    |
-| Price                | 10500.0                                   |
-| Description          | Car in very good condition, LPG installed |
-| Date added           | 28/09/21                                  |
-x======================x===========================================x
-| ID                   | 1ec46226-330f-11ec-8d3d-0242ac130003      |
-| Make                 | Ford                                      |
-| Model                | Fusion                                    |
-| Year                 | 2017                                      |
-| Odometer             | 65000                                     |
-| Price                | 18000.0                                   |
-| Description          | Selling a good car                        |
-| Date added           | 18/09/21                                  |
-x======================x===========================================x
-| ID                   | 7073efd8-330f-11ec-8d3d-0242ac130003      |
-| Make                 | Ford                                      |
-| Model                | Focus                                     |
-| Year                 | 2017                                      |
-| Odometer             | 103000                                    |
-| Price                | 19000.0                                   |
-| Description          | Like new                                  |
-| Date added           | 24/08/21                                  |
-x======================x===========================================x
-```
-___
 #### Input
 ```
-Please choose language (uk | en) default: en
-uk
-Будь-ласка введіть правила пошуку(для пропуску нажміть enter)
-	Введіть виробник:ford
-	Введіть модель:
-	Введіть рік від:1764
-Аргумент 1764 повинен бути >= 1800 і <= 2021
-	Введіть рік від:
-	Введіть рік до:
-	Введіть ціна від:-123
-Аргумент -123.0 повинен бути >= 0 і <= 1.7976931348623157e+308
-	Введіть ціна від:дві тисячі
-Аргумент дві тисячі не є число
-	Введіть ціна від:
-	Введіть ціна до:
-Будь-ласка введіть атрибут для сортування (price | date_added) за замовчуванням: date_added
+Welcome to car-management. Search for any car of your dreams.
+x=========================x
+|        Main menu        |
+x===x=====================x
+| 1 | Search new cars     |
+| 2 | Show available cars |
+| 3 | Help                |
+| 4 | Change language     |
+| 5 | Exit                |
+x===x=====================x
+--> 1
+Please input next search rules (to skip one press enter)
+	Make:ford
+	Model:
+	Year from:1764
+Argument 1764 must be >= 1800 and <= 2021
+	Year from:
+	Year to:
+	Price from:-123
+Argument -123.0 must be >= 0 and <= 1.7976931348623157e+308
+	Price from:low
+Argument low is not a number
+	Price from:
+	Price to:
+Please input sort option (price | date_added)default: date_added
 
-Будь-ласка введіть порядок сортування (asc | desc) за замовчуванням: desc
-
-Вибрано сортувати за: date_added порядок сортування: desc
+Please input sort order (asc | desc)default: desc
+asc
+Chosen sort option: date_added sort order: asc
 ```
 #### Output
 ```
