@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require 'fileutils'
-
 # database controller for YAML
 class Database
   DB_PATH = 'db'

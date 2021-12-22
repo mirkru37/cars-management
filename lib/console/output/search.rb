@@ -1,10 +1,5 @@
 # frozen_string_literal: true
 
-require 'terminal-table'
-require 'colorize'
-require './lib/style/table'
-require './lib/style/text'
-
 module Output
   class Search
     MIN_LENGTH = 40

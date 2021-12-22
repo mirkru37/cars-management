@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require './lib/models/menu_item'
-
 module Output
   class Menu
     class << self

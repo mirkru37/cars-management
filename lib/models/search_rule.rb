@@ -1,10 +1,5 @@
 # frozen_string_literal: false
 
-require 'date'
-require './lib/validation/search_rule'
-require './lib/models/inputable'
-require './lib/modules/hashify'
-
 module Models
   class SearchRule < Inputable
     include Hashify

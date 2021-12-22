@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require 'date'
-require './lib/validation/general'
-
 module Validation
   class SearchRule
     class << self
