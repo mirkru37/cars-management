@@ -21,7 +21,7 @@ module Menu
         rules = Input::Search.rules
         sort_by, sort_order = Input::Search.sort
         result = filter_cars(kwargs[:app], rules, sort_by, sort_order)
-        statistic = make_statistic(result, kwargs[:app])
+        statistic = make_statistic(result, rules, kwargs[:app])
         Output::Search.search(statistic, result)
         Output::Menu.show(App::MAIN_MENU, **kwargs)
       end
@@ -58,11 +58,11 @@ module Menu
 
       # @param [Array<Car>] result
       # @param [App] app
-      def make_statistic(result, app)
+      def make_statistic(result, rules, app)
         statistic = Models::Search.new(result.length, 1, rules)
         statistic.request_quantity = Operations::Search.count(app.searches, statistic)
         Operations::Search.append(app.searches, statistic)
-        kwargs[:app].database.dump('searches', app.searches.map(&:to_hash))
+        app.database.dump('searches', app.searches.map(&:to_hash))
         statistic
       end
     end

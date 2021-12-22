@@ -10,7 +10,7 @@ module Input
 
     class << self
       def rules
-        rules = RULES.map { :clone }
+        rules = RULES.map(&:clone)
         res = Input::General.param(rules, message: I18n.t('input.request.rules'))
         res.delete_if do |rule|
           rule.value.to_s.strip.empty?
