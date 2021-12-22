@@ -8,7 +8,7 @@ class I18nConfig
     end
 
     def choose_language(locales)
-      locale = Input.option(locales, default: 'en', message: I18n.t('input.request.language'))
+      locale = Input::General.option(locales, default: 'en', message: I18n.t('input.request.language'))
       I18n.locale = locale
     end
   end
