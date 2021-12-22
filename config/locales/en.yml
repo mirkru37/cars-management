@@ -33,6 +33,7 @@ en:
       language: 'Please choose language'
   actions:
     chosen: 'Chosen'
+    exit: 'Thanks for using our service. Goodbye!'
   words:
     argument: 'Argument'
     integer: 'integer'
@@ -42,3 +43,8 @@ en:
     must_be: 'must be'
     is_not: 'is not a'
   default: 'default'
+  help:
+    questions:
+      use: 'dsfsdf'
+    answers:
+      use: 'asdsaf'

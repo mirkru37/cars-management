@@ -23,7 +23,7 @@ module Input
       # @param [String | nil] default
       # @param [String] message
       # @return [String]
-      def option(options, default: nil, message: '')
+      def option(options, default: nil, message: '', error_message: I18n.t('input.wrong_option'))
         options = options.map(&:downcase)
         print message, ' (', options.join(' | '), ')'
         default.nil? ? puts : puts("#{I18n.t('default')}: #{default}")
@@ -32,9 +32,14 @@ module Input
 
         return default unless default.nil?
 
-        puts I18n.t('input.wrong_option')
+        puts error_message
         options(options, default, message)
       end
+    end
+
+    def self.any(message: I18n.t('input.input_request'))
+      print message
+      gets.downcase.chomp
     end
   end
 end
