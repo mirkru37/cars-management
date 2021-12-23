@@ -3,6 +3,7 @@
 require 'colorize'
 require 'date'
 require 'i18n'
+require 'fileutils'
 require 'terminal-table'
 require 'yaml'
 require_relative 'validation/general'
