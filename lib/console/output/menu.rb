@@ -8,12 +8,12 @@ module Output
       def show(items, title: 'main', error_message: I18n.t('input.wrong_option'), **kwargs)
         table = config_table(items, title)
         puts table
-        option = Input::General.any(message: '--> ').to_i
-        if option.between?(1, items.length)
-          items[option - 1].call(**kwargs)
-        else
+        option = Input::General.menu_option
+        if option.nil? || !option.between?(1, items.length)
           puts error_message.colorize(:light_red)
           show(items, title: title, error_message: error_message, **kwargs)
+        else
+          items[option - 1].call(**kwargs)
         end
       end
 

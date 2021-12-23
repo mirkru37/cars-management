@@ -3,6 +3,15 @@
 module Input
   class General
     class << self
+      # @return [Integer, nil]
+      def menu_option
+        option = Validation::General.handle_int(any(message: '--> '))
+      rescue TypeError
+        nil
+      else
+        option
+      end
+
       # @param [Inputable] parameters
       # @param [String] message
       # @return [Inputable]
@@ -35,11 +44,12 @@ module Input
         puts error_message
         options(options, default, message)
       end
-    end
 
-    def self.any(message: I18n.t('input.input_request'))
-      print message
-      gets.downcase.chomp
+      # @param [String] message
+      def any(message: I18n.t('input.input_request'))
+        print message
+        gets.downcase.chomp
+      end
     end
   end
 end
