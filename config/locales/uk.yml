@@ -47,8 +47,8 @@ uk:
   default: 'за замовчуванням'
   welcome: 'Ласкаво просимо до car-management. Найдіть машину своєї мрії.'
   menu:
-    search_car: 'Пошук машин'
-    show_all_cars: 'Показати доступні'
+    search_car: 'Пошук машини'
+    show_all_cars: 'Показати всі машини'
     help: 'Справка'
     change_language: 'Змінити мову'
     exit: 'Вихід'

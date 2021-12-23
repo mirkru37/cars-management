@@ -47,8 +47,8 @@ en:
   default: 'default'
   welcome: 'Welcome to car-management. Search for any car of your dreams.'
   menu:
-    search_car: 'Search new cars'
-    show_all_cars: 'Show available cars'
+    search_car: 'Search car'
+    show_all_cars: 'Show all cars'
     help: 'Help'
     change_language: 'Change language'
     exit: 'Exit'
