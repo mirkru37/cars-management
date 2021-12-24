@@ -12,19 +12,6 @@ module Output
         result(result)
       end
 
-      # @param [Models::Search] search
-      def statistic(search)
-        table = Terminal::Table.new title:
-                                      Style::Text.title('statistic', color: :light_green)
-        Style::Table.config_search_result(table, @search_result_table_width)
-        table << [Style::Text.header('total_quantity', color: :green),
-                  Style::Text.value(search.total_quantity)]
-        table << [Style::Text.header('request_quantity', color: :green),
-                  Style::Text.value(search.request_quantity)]
-        table.align_column(1, :right)
-        puts table
-      end
-
       # @param [Array<Car>] result
       def result(result)
         table = result.empty? ? Style::Table.empty_table : fill_res(result)
@@ -59,6 +46,19 @@ module Output
           end
           table << :separator
         end
+      end
+
+      # @param [Models::Search] search
+      def statistic(search)
+        table = Terminal::Table.new title:
+                                      Style::Text.title('statistic', color: :light_green)
+        Style::Table.config_search_result(table, @search_result_table_width)
+        table << [Style::Text.header('total_quantity', color: :green),
+                  Style::Text.value(search.total_quantity)]
+        table << [Style::Text.header('request_quantity', color: :green),
+                  Style::Text.value(search.request_quantity)]
+        table.align_column(1, :right)
+        puts table
       end
     end
   end

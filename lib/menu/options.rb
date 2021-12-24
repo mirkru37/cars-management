@@ -5,11 +5,11 @@ module Menu
     MAIN_QUESTIONS = %w[search show_all].freeze
 
     class << self
-      def choose_language(**kwargs)
+      def change_language(**kwargs)
         locale = Input::General.option(App::LOCALES, default: 'en', message: I18n.t('input.request.language'))
         I18n.locale = locale
         Output::Search.result_table_width = Operations::Car.max_attr_len(kwargs[:app].cars)
-        Output::Menu.show(App::MAIN_MENU, **kwargs)
+        Output::Menu.main(**kwargs)
       end
 
       def close(**_)
@@ -17,24 +17,24 @@ module Menu
         exit
       end
 
-      def search_car(**kwargs)
+      def search_car(kwargs = {})
         rules = Input::Search.rules
         sort_by, sort_order = Input::Search.sort
         result = filter_cars(kwargs[:app], rules, sort_by, sort_order)
         statistic = make_statistic(result, rules, kwargs[:app])
         Output::Search.search(statistic, result)
-        Output::Menu.show(App::MAIN_MENU, **kwargs)
+        Output::Menu.main(**kwargs)
       end
 
       def show_all(**kwargs)
         Output::Search.result(kwargs[:app].cars)
-        Output::Menu.show(App::MAIN_MENU, **kwargs)
+        Output::Menu.main(**kwargs)
       end
 
       def help_main(**kwargs)
         table = config_help_table(MAIN_QUESTIONS)
         puts table
-        Output::Menu.show(App::MAIN_MENU, **kwargs)
+        Output::Menu.main(**kwargs)
       end
 
       private

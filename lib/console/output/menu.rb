@@ -3,6 +3,10 @@
 module Output
   class Menu
     class << self
+      def main(**kwargs)
+        show(App.main_menu, **kwargs)
+      end
+
       # @param [Array<MenuItem>] items
       # @param [String] title
       def show(items, title: 'main', error_message: I18n.t('input.wrong_option'), **kwargs)
