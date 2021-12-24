@@ -5,7 +5,7 @@ module Input
     class << self
       # @return [Integer, nil]
       def menu_option
-        option = Validation::General.handle_int(text(message: '--> '))
+        option = Validation::General.handle_int(request_text(message: '--> '))
       rescue TypeError
         nil
       else
@@ -47,7 +47,7 @@ module Input
       private
 
       # @param [String] message
-      def text(message: I18n.t('input.input_request'))
+      def request_text(message: I18n.t('input.input_request'))
         print Style::Text.call(message, Style::TEXT_STYLES[:input])
         gets.downcase.chomp
       end
