@@ -31,7 +31,7 @@ module Input
       # @param [Array<String>] options
       # @param [String | nil] default
       # @param [String] message
-      # @return [String]
+      # @return [String, nil]
       def option(options, default: nil, message: '', error_message: I18n.t('errors.wrong_option'))
         options = options.map(&:downcase)
         print_options(options, default, message)
@@ -41,7 +41,7 @@ module Input
         return default unless default.nil?
 
         puts Style::Text.error(error_message)
-        options(options, default, message)
+        option(options, default: default, message: message, error_message: error_message)
       end
 
       private
