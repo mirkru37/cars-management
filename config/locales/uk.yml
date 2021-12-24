@@ -14,12 +14,12 @@ uk:
     date_added: 'Дата додавання'
     sort_order: 'Порядок сортування'
     sort_option: 'Сортувати за'
+    total_quantity: 'Знайдено машин'
+    request_quantity: 'Кількість запитів'
   titles:
     statistic: 'Статистика'
     result: 'Результат'
     main: 'Головне меню'
-    total_quantity: 'Знайдено машин'
-    request_quantity: 'Кількість запитів'
   headers:
     field: 'Поле'
     information: 'Інформація'

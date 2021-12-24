@@ -14,7 +14,7 @@ module Output
         puts table
         option = Input::General.menu_option
         if option.nil? || !option.between?(1, items.length)
-          puts Style::Text.error(error_message)
+          puts Style::Text.call(error_message, Style::TEXT_STYLES[:error])
           show(items, title: title, error_message: error_message, **kwargs)
         else
           items[option - 1].call(**kwargs)
@@ -25,10 +25,11 @@ module Output
 
       def config_table(items, title)
         rows = items.map.with_index do |item, i|
-          [Style::Text.highlight((i + 1).to_s), Style::Text.hint(I18n.t("menu.#{item.title}"))]
+          [Style::Text.call((i + 1).to_s, Style::TEXT_STYLES[:highlight]),
+           Style::Text.call(I18n.t("menu.#{item.title}"), Style::TEXT_STYLES[:hint])]
         end
         table = Terminal::Table.new title:
-                                      Style::Text.title(title)
+                                      Style::Text.call(title, Style::TEXT_STYLES[:title])
         table.rows = rows
         Style::Table.config_general(table)
         table

@@ -12,17 +12,17 @@ module Input
         option
       end
 
-      # @param [Inputable] parameters
+      # @param [Array<Inputable>] parameters
       # @param [String] message
       # @return [Inputable]
       def param(parameters, message: I18n.t('input.input_request'))
-        puts Style::Text.input(message)
+        puts Style::Text.call(message, Style::TEXT_STYLES[:input])
         parameters.each do |param|
-          print Style::Text.input("\t#{I18n.t("attributes.#{param.name}").capitalize}:")
+          print_attr_name(param)
           begin
             param.value = gets.chomp
           rescue TypeError => e
-            puts Style::Text.error(e.message)
+            puts Style::Text.call(e.message, Style::TEXT_STYLES[:error])
             redo
           end
         end
@@ -40,7 +40,7 @@ module Input
 
         return default unless default.nil?
 
-        puts Style::Text.error(error_message)
+        puts Style::Text.call(error_message, Style::TEXT_STYLES[:error])
         option(options, default: default, message: message, error_message: error_message)
       end
 
@@ -48,16 +48,21 @@ module Input
 
       # @param [String] message
       def text(message: I18n.t('input.input_request'))
-        print Style::Text.input(message)
+        print Style::Text.call(message, Style::TEXT_STYLES[:input])
         gets.downcase.chomp
+      end
+
+      # @param [Inputable] attr
+      def print_attr_name(attr)
+        print Style::Text.call("\t#{I18n.t("attributes.#{attr.name}").capitalize}:", Style::TEXT_STYLES[:input])
       end
 
       # @param [Array<String>] options
       # @param [String | nil] default
       # @param [String] message
       def print_options(options, default, message)
-        print Style::Text.input("#{message} ( #{options.join(' | ')} ) ")
-        default.nil? ? puts : puts(Style::Text.input("#{I18n.t('default')}: #{default}"))
+        print Style::Text.call("#{message} ( #{options.join(' | ')} ) ", Style::TEXT_STYLES[:input])
+        default.nil? ? puts : puts(Style::Text.call("#{I18n.t('default')}: #{default}", Style::TEXT_STYLES[:input]))
       end
     end
   end

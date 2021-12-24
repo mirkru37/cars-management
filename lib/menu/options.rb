@@ -13,7 +13,7 @@ module Menu
       end
 
       def close(**_)
-        puts Style::Text.important(I18n.t('actions.exit'))
+        puts Style::Text.call(I18n.t('actions.exit'), Style::TEXT_STYLES[:important])
         exit
       end
 
@@ -42,11 +42,11 @@ module Menu
       # @param [Array<String>] questions
       def config_help_table(questions)
         table = Terminal::Table.new do |t|
-          t.title = Style::Text.header('help')
+          t.title = Style::Text.call(I18n.t('headers.help'), Style::TEXT_STYLES[:header])
         end
         table.rows = questions.map do |question|
-          [Style::Text.highlight(I18n.t("help.questions.#{question}")),
-           Style::Text.hint(I18n.t("help.answers.#{question}"))]
+          [Style::Text.call(I18n.t("help.questions.#{question}"), Style::TEXT_STYLES[:highlight]),
+           Style::Text.call(I18n.t("help.answers.#{question}"), Style::TEXT_STYLES[:hint])]
         end
         Style::Table.config_general(table)
         table

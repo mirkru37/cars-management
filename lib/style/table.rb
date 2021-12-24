@@ -22,7 +22,7 @@ module Style
       end
 
       def empty_table
-        Terminal::Table.new title: Text.error(I18n.t('errors.empty_table')) do |table|
+        Terminal::Table.new title: Text.call(I18n.t('errors.empty_table'), TEXT_STYLES[:error]) do |table|
           table << [' ']
           table << :separator
         end

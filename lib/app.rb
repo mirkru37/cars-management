@@ -13,7 +13,7 @@ class App
     @cars = Operations::Car.init_cars_array(database.load('db'))
     Output::Search.result_table_width = Operations::Car.max_attr_len(@cars)
     @searches = Operations::Search.init_searches_array(database.load('searches'))
-    puts Style::Text.important(I18n.t('welcome'))
+    puts Style::Text.call(I18n.t('welcome'), Style::TEXT_STYLES[:important])
   end
 
   class << self

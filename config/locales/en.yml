@@ -14,12 +14,12 @@ en:
     date_added: 'Date added'
     sort_order: 'Sort order'
     sort_option: 'Sort option'
+    total_quantity: 'Cars found'
+    request_quantity: 'Request quantity'
   titles:
     statistic: 'Statistic'
     result: 'Result'
     main: 'Main menu'
-    total_quantity: 'Cars found'
-    request_quantity: 'Request quantity'
   headers:
     field: 'Field'
     information: 'Information'
