@@ -17,17 +17,15 @@ en:
   titles:
     statistic: 'Statistic'
     result: 'Result'
-    empty_table: 'Table is empty'
     main: 'Main menu'
+    total_quantity: 'Cars found'
+    request_quantity: 'Request quantity'
   headers:
     field: 'Field'
     information: 'Information'
-    total_quantity: 'Cars found'
-    request_quantity: 'Request quantity'
     help: 'Help'
   input:
     input_request: 'Please input'
-    wrong_option: 'Oops, seems like there is no such an option. Try again.'
     request:
       rules: 'Please input next search rules (to skip one press enter)'
       sort_option: 'Please input sort option'
@@ -62,3 +60,6 @@ en:
       show_all: "And answer is YES, YOU CAN!!\n
                  Just enter '2' in console and we promise,\n
                  you will see the in a flash."
+  errors:
+    empty_table: 'Table is empty'
+    wrong_option: 'Oops, seems like there is no such an option. Try again.'

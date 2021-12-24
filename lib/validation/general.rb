@@ -9,7 +9,7 @@ module Validation
         Integer(value)
       rescue ArgumentError
         error_msg = "#{I18n.t('words.argument')} #{value}"\
-                    "  #{I18n.t('sentences.is_not')} #{I18n.t('words.integer')}"
+                    " #{I18n.t('sentences.is_not')} #{I18n.t('words.integer')}"
         raise TypeError, error_msg
       end
 

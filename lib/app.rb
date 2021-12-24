@@ -8,12 +8,12 @@ class App
   attr_reader :cars, :database, :searches
 
   def initialize
+    I18nConfig.init
     @database = Database.new
     @cars = Operations::Car.init_cars_array(database.load('db'))
     Output::Search.result_table_width = Operations::Car.max_attr_len(@cars)
     @searches = Operations::Search.init_searches_array(database.load('searches'))
-    I18nConfig.init
-    puts Style::Text.welcome
+    puts Style::Text.important(I18n.t('welcome'))
   end
 
   class << self

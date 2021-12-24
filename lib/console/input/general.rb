@@ -16,13 +16,13 @@ module Input
       # @param [String] message
       # @return [Inputable]
       def param(parameters, message: I18n.t('input.input_request'))
-        puts message
+        puts Style::Text.input(message)
         parameters.each do |param|
-          print "\t#{I18n.t("attributes.#{param.name}").capitalize}:"
+          print Style::Text.input("\t#{I18n.t("attributes.#{param.name}").capitalize}:")
           begin
             param.value = gets.chomp
           rescue TypeError => e
-            puts e
+            puts Style::Text.error(e.message)
             redo
           end
         end
@@ -32,23 +32,32 @@ module Input
       # @param [String | nil] default
       # @param [String] message
       # @return [String]
-      def option(options, default: nil, message: '', error_message: I18n.t('input.wrong_option'))
+      def option(options, default: nil, message: '', error_message: I18n.t('errors.wrong_option'))
         options = options.map(&:downcase)
-        print message, ' (', options.join(' | '), ')'
-        default.nil? ? puts : puts("#{I18n.t('default')}: #{default}")
+        print_options(options, default, message)
         option = gets.downcase.chomp
         return option if options.include?(option)
 
         return default unless default.nil?
 
-        puts error_message
+        puts Style::Text.error(error_message)
         options(options, default, message)
       end
 
       # @param [String] message
       def any(message: I18n.t('input.input_request'))
-        print message
+        print Style::Text.input(message)
         gets.downcase.chomp
+      end
+
+      private
+
+      # @param [Array<String>] options
+      # @param [String | nil] default
+      # @param [String] message
+      def print_options(options, default, message)
+        print Style::Text.input("#{message} ( #{options.join(' | ')} ) ")
+        default.nil? ? puts : puts(Style::Text.input("#{I18n.t('default')}: #{default}"))
       end
     end
   end

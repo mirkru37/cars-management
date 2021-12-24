@@ -42,15 +42,21 @@ module Menu
       # @param [Array<String>] questions
       def config_help_table(questions)
         table = Terminal::Table.new do |t|
-          t.title = Style::Text.header('help', color: :light_cyan)
+          t.title = Style::Text.header('help')
         end
         table.rows = questions.map do |question|
-          [Style::Text.question(question), Style::Text.answer(question)]
+          [Style::Text.highlight(I18n.t("help.questions.#{question}")),
+           Style::Text.hint(I18n.t("help.answers.#{question}"))]
         end
         Style::Table.config_general(table)
         table
       end
 
+      # @param [App] app
+      # @param [Array<SearchRule>] rules
+      # @param [String] sort_by
+      # @param [String] sort_order
+      # @return [Array<Car>]
       def filter_cars(app, rules, sort_by, sort_order)
         result = Filters::Car.filter_by_rules(app.cars, rules)
         Sorters::Car.sort(result, sort_by: sort_by, sort_order: sort_order)

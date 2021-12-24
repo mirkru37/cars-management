@@ -30,8 +30,8 @@ module Output
       # @param [Array<Car>] result
       def fill_res(result)
         Terminal::Table.new title: Style::Text.title('result') do |table|
-          table.headings = [Style::Text.header('field', color: :light_cyan),
-                            Style::Text.header('information', color: :light_cyan)]
+          table.headings = [Style::Text.header('field'),
+                            Style::Text.header('information')]
           make_rows(table, result)
         end
       end
@@ -42,7 +42,7 @@ module Output
         data.each do |item|
           item.attributes.each do |key, value|
             value = value.strftime(Models::Car::DATE_FORMAT) if value.instance_of?(DateTime)
-            table << [Style::Text.attribute_(key), Style::Text.value(value, color: :cyan)]
+            table << [Style::Text.highlight(I18n.t("attributes.#{key}")), Style::Text.hint(value.to_s)]
           end
           table << :separator
         end
@@ -51,12 +51,12 @@ module Output
       # @param [Models::Search] search
       def statistic(search)
         table = Terminal::Table.new title:
-                                      Style::Text.title('statistic', color: :light_green)
+                                      Style::Text.title('statistic')
         Style::Table.config_search_result(table, @search_result_table_width)
-        table << [Style::Text.header('total_quantity', color: :green),
-                  Style::Text.value(search.total_quantity)]
-        table << [Style::Text.header('request_quantity', color: :green),
-                  Style::Text.value(search.request_quantity)]
+        table << [Style::Text.title('total_quantity'),
+                  Style::Text.hint(search.total_quantity.to_s)]
+        table << [Style::Text.title('request_quantity'),
+                  Style::Text.hint(search.request_quantity.to_s)]
         table.align_column(1, :right)
         puts table
       end

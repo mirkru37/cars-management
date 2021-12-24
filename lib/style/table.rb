@@ -22,7 +22,7 @@ module Style
       end
 
       def empty_table
-        Terminal::Table.new title: Text.title('empty_table', color: :light_red) do |table|
+        Terminal::Table.new title: Text.error(I18n.t('errors.empty_table')) do |table|
           table << [' ']
           table << :separator
         end

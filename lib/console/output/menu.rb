@@ -9,12 +9,12 @@ module Output
 
       # @param [Array<MenuItem>] items
       # @param [String] title
-      def show(items, title: 'main', error_message: I18n.t('input.wrong_option'), **kwargs)
+      def show(items, title: 'main', error_message: I18n.t('errors.wrong_option'), **kwargs)
         table = config_table(items, title)
         puts table
         option = Input::General.menu_option
         if option.nil? || !option.between?(1, items.length)
-          puts error_message.colorize(:light_red)
+          puts Style::Text.error(error_message)
           show(items, title: title, error_message: error_message, **kwargs)
         else
           items[option - 1].call(**kwargs)
@@ -25,10 +25,10 @@ module Output
 
       def config_table(items, title)
         rows = items.map.with_index do |item, i|
-          [(i + 1).to_s.colorize(:light_blue).bold, I18n.t("menu.#{item.title}").colorize(:blue)]
+          [Style::Text.highlight((i + 1).to_s), Style::Text.hint(I18n.t("menu.#{item.title}"))]
         end
         table = Terminal::Table.new title:
-                                      Style::Text.title(title, color: :light_blue)
+                                      Style::Text.title(title)
         table.rows = rows
         Style::Table.config_general(table)
         table
