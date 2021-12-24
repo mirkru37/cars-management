@@ -3,8 +3,8 @@
 module Output
   class Menu
     class << self
-      def main(**kwargs)
-        show(App.main_menu, **kwargs)
+      def main(app:)
+        show(App.main_menu, app: app)
       end
 
       # @param [Array<MenuItem>] items
