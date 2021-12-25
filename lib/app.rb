@@ -1,8 +1,13 @@
 # frozen_string_literal: true
 
 class App
-  MAIN_MENU_ATTRS = { search_car: :search_car, show_all_cars: :show_all, help: :help_main,
-                      change_language: :change_language, exit: :close }.freeze
+  MAIN_MENU_ATTRS = {
+    search_car: :search_car,
+    show_all_cars: :show_all,
+    help: :help_main,
+    change_language: :change_language,
+    exit: :close
+  }.freeze
   LOCALES = %w[uk en].freeze
 
   attr_reader :cars, :database, :searches
