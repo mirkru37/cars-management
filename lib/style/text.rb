@@ -9,7 +9,15 @@ module Style
         text = text.colorize(style[:color]) if style[:color]
         return text unless style[:typeface]
 
-        case style[:typeface]
+        apply_typeface(text, style[:typeface])
+      end
+
+      private
+
+      # @param [String] text
+      # @param [Symbol] typeface
+      def apply_typeface(text, typeface)
+        case typeface
         when :bold
           text.bold
         when :italic
