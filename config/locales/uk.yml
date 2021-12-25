@@ -50,6 +50,9 @@ uk:
     help: 'Справка'
     change_language: 'Змінити мову'
     exit: 'Вихід'
+    log_in: 'Увійти'
+    sign_up: 'Зареєструватись'
+    log_out: 'Вихід з аккаунту'
   help:
     questions:
       search: 'Як мені найти машину?'

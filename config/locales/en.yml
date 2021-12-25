@@ -50,6 +50,9 @@ en:
     help: 'Help'
     change_language: 'Change language'
     exit: 'Exit'
+    log_in: 'Log in'
+    sign_up: 'Sign up'
+    log_out: 'Log out'
   help:
     questions:
       search: 'How i supposed to search a car?'

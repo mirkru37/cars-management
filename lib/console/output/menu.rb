@@ -4,7 +4,7 @@ module Output
   class Menu
     class << self
       def main(app:)
-        show(App.main_menu, app: app)
+        show(app.main_menu, app: app)
       end
 
       # @param [Array<MenuItem>] items

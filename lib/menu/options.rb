@@ -26,6 +26,11 @@ module Menu
         Output::Menu.main(app: app)
       end
 
+      def sign_up(app:)
+        puts 'Signed up'
+        log_in(app: app, user: 1)
+      end
+
       def show_all(app:)
         Output::Search.result(app.cars)
         Output::Menu.main(app: app)
@@ -34,6 +39,18 @@ module Menu
       def help_main(app:)
         table = config_help_table(MAIN_QUESTIONS)
         puts table
+        Output::Menu.main(app: app)
+      end
+
+      def log_in(app:, user: nil)
+        puts 'Logged in'
+        app.user = user.nil? ? 1 : user # user.nil? ? request data : paste value
+        Output::Menu.main(app: app)
+      end
+
+      def log_out(app:)
+        puts 'Logged out'
+        app.user = nil
         Output::Menu.main(app: app)
       end
 
