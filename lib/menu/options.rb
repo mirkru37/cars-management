@@ -27,8 +27,14 @@ module Menu
       end
 
       def sign_up(app:)
-        puts 'Signed up'
-        log_in(app: app, user: 1)
+        user = Input::User.sign_up(app.database)
+        if user.nil?
+          Output::Menu.main(app: app)
+        else
+          app.database.append('users', user, [Models::User, BCrypt::Password])
+          puts Style::Text.call(I18n.t('success.sign_up'), Style::TEXT_STYLES[:important])
+          log_in(app: app, user: user)
+        end
       end
 
       def show_all(app:)
@@ -43,13 +49,19 @@ module Menu
       end
 
       def log_in(app:, user: nil)
-        puts 'Logged in'
-        app.user = user.nil? ? 1 : user # user.nil? ? request data : paste value
+        if user.nil?
+          user = Input::User.log_in
+          unless Validation::User.match?(user, app.database)
+            puts Style::Text.call(I18n.t('errors.user_invalid'), Style::TEXT_STYLES[:error])
+            user = nil
+          end
+        end
+        app.user = user
         Output::Menu.main(app: app)
       end
 
       def log_out(app:)
-        puts 'Logged out'
+        puts Style::Text.call(I18n.t('success.log_out'), Style::TEXT_STYLES[:important])
         app.user = nil
         Output::Menu.main(app: app)
       end

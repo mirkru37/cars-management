@@ -16,12 +16,12 @@ module Input
       # @param [String] message
       # @return [Inputable]
       def param(parameters, message: I18n.t('input.input_request'))
-        puts Style::Text.call(message, Style::TEXT_STYLES[:input])
+        puts Style::Text.call(message, Style::TEXT_STYLES[:input]) if message
         parameters.each do |param|
           print_attr_name(param)
           begin
             param.value = gets.chomp
-          rescue TypeError => e
+          rescue StandardError => e
             puts Style::Text.call(e.message, Style::TEXT_STYLES[:error])
             redo
           end

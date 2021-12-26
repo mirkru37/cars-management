@@ -37,8 +37,8 @@ class App
   end
 
   def user=(value)
-    # store or delete current user from db
-    @user = nil if value.nil? # never mind, it's just plug for rubocop
+    # store or delete current user from db ( save user to log in automatically )
+    puts Style::Text.call((I18n.t('welcome_user') % value.email), Style::TEXT_STYLES[:important]) unless value.nil?
     @user = value
   end
 

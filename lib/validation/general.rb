@@ -32,5 +32,11 @@ module Validation
         raise TypeError, error_msg unless value >= min && value <= max
       end
     end
+
+    # @param [String] value
+    # @param [Regexp] regexp
+    def self.handle_regexp(value, regexp)
+      raise ArgumentError, "value: #{value} doesn't match #{regexp}" unless regexp.match(value)
+    end
   end
 end
