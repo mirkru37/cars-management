@@ -21,7 +21,7 @@ class App
   LOCALES = %w[uk en].freeze
 
   attr_reader :cars, :database, :searches, :user
-
+  
   def initialize
     I18nConfig.init
     @database = Database.new
