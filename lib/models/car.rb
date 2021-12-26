@@ -24,10 +24,10 @@ module Models
 
     # @return [Hash]
     def attributes
-      ATTR_LIST.map do |attribute|
+      (ATTR_LIST.map do |attribute|
         value = instance_variable_get("@#{attribute}")
         [attribute, value]
-      end.to_h
+      end).to_h
     end
 
     # @return [Integer]

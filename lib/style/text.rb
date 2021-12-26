@@ -4,23 +4,27 @@ module Style
   class Text
     class << self
       # @param [String] text
-      def attribute_(text, color: :light_magenta)
-        I18n.t("attributes.#{text}").to_s.colorize(color)
+      # @param [Hash] style
+      def call(text, style)
+        text = text.colorize(style[:color]) if style[:color]
+        return text unless style[:typeface]
+
+        apply_typeface(text, style[:typeface])
       end
+
+      private
 
       # @param [String] text
-      def title(text, color: :magenta)
-        I18n.t("titles.#{text}").colorize(color).bold
-      end
-
-      # @param [String] text
-      def header(text, color: :light_magenta)
-        I18n.t("headers.#{text}").colorize(color).bold
-      end
-
-      # @param [Object] value
-      def value(value, color: :green)
-        value.to_s.colorize(color).italic
+      # @param [Symbol] typeface
+      def apply_typeface(text, typeface)
+        case typeface
+        when :bold
+          text.bold
+        when :italic
+          text.italic
+        else
+          text
+        end
       end
     end
   end

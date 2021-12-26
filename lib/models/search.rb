@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 
-require './lib/hashify'
-
 module Models
   class Search
     include Hashify

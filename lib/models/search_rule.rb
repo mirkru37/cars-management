@@ -1,10 +1,5 @@
 # frozen_string_literal: false
 
-require 'date'
-require './lib/validation'
-require './lib/inputable'
-require './lib/hashify'
-
 module Models
   class SearchRule < Inputable
     include Hashify
@@ -14,7 +9,7 @@ module Models
     # @param [Integer] min_year
     def self.year(name, max_year: DateTime.now.year, min_year: 1800)
       SearchRule.new(name,
-                     validation_method: Validation.method(:year),
+                     validation_method: Validation::SearchRule.method(:year),
                      validation_parameters: { max_year: max_year, min_year: min_year })
     end
 
@@ -23,7 +18,7 @@ module Models
     # @param [Integer] min_price
     def self.price(name, max_price: Float::MAX, min_price: 0)
       SearchRule.new(name,
-                     validation_method: Validation.method(:price),
+                     validation_method: Validation::SearchRule.method(:price),
                      validation_parameters: { max_price: max_price, min_price: min_price })
     end
 
