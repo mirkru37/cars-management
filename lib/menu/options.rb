@@ -68,6 +68,21 @@ module Menu
 
       private
 
+      # @param [Array<Hash>] all_searches
+      # @param [Hash] user_searches
+      # @param [Search] search
+      # @param [String] email
+      def add_user_search(all_searches, user_searches, search, email)
+        if user_searches.nil?
+          all_searches << {
+            'email' => email,
+            'search' => [search.to_hash]
+          }
+        else
+          user_searches['search'] << search.to_hash
+        end
+      end
+
       # @param [Array<String>] questions
       def config_help_table(questions)
         table = Terminal::Table.new do |t|
@@ -91,11 +106,21 @@ module Menu
         Sorters::Car.sort(result, sort_by: sort_by, sort_order: sort_order)
       end
 
+      # @param [Models::Search] search
+      def store_user_search(search, app)
+        email = app.user.email
+        all_searches = app.database.load('user_searches')
+        user_searches = all_searches.find { |search_| search_['email'] == email }
+        add_user_search(all_searches, user_searches, search, email)
+        app.database.dump('user_searches', all_searches)
+      end
+
       # @param [Array<Car>] result
       # @param [App] app
       def make_statistic(app, result, rules)
         statistic = Models::Search.new(result.length, 1, rules)
         statistic.request_quantity = Operations::Search.count(app.searches, statistic)
+        store_user_search(statistic, app) unless app.user.nil?
         Operations::Search.append(app.searches, statistic)
         app.database.dump('searches', app.searches.map(&:to_hash))
         statistic
