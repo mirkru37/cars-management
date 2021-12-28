@@ -7,15 +7,28 @@ module Style
     ADDITIONAL_SYMBOLS = 7
 
     class << self
+      # @param [Array<String>] questions
+      def config_help_table(questions)
+        table = Terminal::Table.new do |t|
+          t.title = Style::Text.call(I18n.t('headers.help'), Style::TEXT_STYLES[:header])
+        end
+        table.rows = questions.map do |question|
+          [Style::Text.call(I18n.t("help.questions.#{question}"), Style::TEXT_STYLES[:highlight]),
+           Style::Text.call(I18n.t("help.answers.#{question}"), Style::TEXT_STYLES[:hint])]
+        end
+        Style::Table.config_general(table)
+        table
+      end
+
       # @param [Terminal::Table] table
-      # @param [Integer] width
+      # @param [Integer, nil] width
       def config_general(table, width = nil)
         table.style = { border_x: '=', border_i: 'x' }
         table.style = { width: width + ADDITIONAL_SYMBOLS } unless width.nil?
       end
 
       # @param [Terminal::Table] table
-      # @param [Integer] width
+      # @param [Integer, nil] width
       def config_search_result(table, width)
         config_general(table, width)
         table.style = { border_bottom: false }

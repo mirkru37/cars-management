@@ -13,6 +13,7 @@ class App
   MAIN_MENU_LOGGED_ATTRS = {
     search_car: :search_car,
     show_all_cars: :show_all,
+    my_searches: :my_searches,
     log_out: :log_out,
     help: :help_main,
     change_language: :change_language,

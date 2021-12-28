@@ -17,11 +17,18 @@ module Menu
         exit
       end
 
+      def my_searches(app:)
+        user_searches = select_user_searches(app.user.email, app.database.load('user_searches'))
+        Output::UserSearches.searches(user_searches)
+        Output::Menu.main(app: app)
+      end
+
       def search_car(app:)
         rules = Input::Search.rules
         sort_by, sort_order = Input::Search.sort
         result = filter_cars(app, rules, sort_by, sort_order)
         statistic = make_statistic(app, result, rules)
+        store_user_search(statistic, app) unless app.user.nil?
         Output::Search.search(statistic, result)
         Output::Menu.main(app: app)
       end
@@ -43,7 +50,7 @@ module Menu
       end
 
       def help_main(app:)
-        table = config_help_table(MAIN_QUESTIONS)
+        table = Style::Table.config_help_table(MAIN_QUESTIONS)
         puts table
         Output::Menu.main(app: app)
       end
@@ -72,29 +79,17 @@ module Menu
       # @param [Hash] user_searches
       # @param [Search] search
       # @param [String] email
-      def add_user_search(all_searches, user_searches, search, email)
-        if user_searches.nil?
-          all_searches << {
-            'email' => email,
-            'search' => [search.to_hash]
-          }
-        else
-          user_searches['search'] << search.to_hash
-        end
-      end
-
-      # @param [Array<String>] questions
-      def config_help_table(questions)
-        table = Terminal::Table.new do |t|
-          t.title = Style::Text.call(I18n.t('headers.help'), Style::TEXT_STYLES[:header])
-        end
-        table.rows = questions.map do |question|
-          [Style::Text.call(I18n.t("help.questions.#{question}"), Style::TEXT_STYLES[:highlight]),
-           Style::Text.call(I18n.t("help.answers.#{question}"), Style::TEXT_STYLES[:hint])]
-        end
-        Style::Table.config_general(table)
-        table
-      end
+      # def add_user_search(all_searches, user_searches, search, email)
+      #   search = search.to_hash.except('request_quantity')
+      #   if user_searches.nil?
+      #     all_searches << {
+      #       'email' => email,
+      #       'searches' => [search]
+      #     }
+      #   else
+      #     user_searches['searches'] << search
+      #   end
+      # end
 
       # @param [App] app
       # @param [Array<SearchRule>] rules
@@ -106,12 +101,24 @@ module Menu
         Sorters::Car.sort(result, sort_by: sort_by, sort_order: sort_order)
       end
 
+      def select_user_searches(email, all_searches)
+        user_searches = all_searches.find { |search_| search_['email'] == email }
+        if user_searches.nil?
+          user_searches = {
+            'email' => email,
+            'searches' => []
+          }
+        end
+        user_searches
+      end
+
       # @param [Models::Search] search
       def store_user_search(search, app)
         email = app.user.email
         all_searches = app.database.load('user_searches')
-        user_searches = all_searches.find { |search_| search_['email'] == email }
-        add_user_search(all_searches, user_searches, search, email)
+        user_searches = select_user_searches(email, all_searches)
+        all_searches << user_searches if user_searches['searches'].empty?
+        user_searches['searches'] << search.to_hash.except('request_quantity')
         app.database.dump('user_searches', all_searches)
       end
 
@@ -120,7 +127,6 @@ module Menu
       def make_statistic(app, result, rules)
         statistic = Models::Search.new(result.length, 1, rules)
         statistic.request_quantity = Operations::Search.count(app.searches, statistic)
-        store_user_search(statistic, app) unless app.user.nil?
         Operations::Search.append(app.searches, statistic)
         app.database.dump('searches', app.searches.map(&:to_hash))
         statistic
