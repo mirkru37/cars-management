@@ -22,6 +22,7 @@ uk:
     statistic: 'Статистика'
     result: 'Результат'
     main: 'Головне меню'
+    user_searches: 'Запити %s'
   headers:
     field: 'Поле'
     information: 'Інформація'
@@ -55,6 +56,7 @@ uk:
     log_in: 'Увійти'
     sign_up: 'Зареєструватись'
     log_out: 'Вихід з аккаунту'
+    my_searches: 'Мої запити'
   help:
     questions:
       search: 'Як мені найти машину?'

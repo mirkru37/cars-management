@@ -22,6 +22,7 @@ en:
     statistic: 'Statistic'
     result: 'Result'
     main: 'Main menu'
+    user_searches: 'Searches of %s'
   headers:
     field: 'Field'
     information: 'Information'
@@ -55,6 +56,7 @@ en:
     log_in: 'Log in'
     sign_up: 'Sign up'
     log_out: 'Log out'
+    my_searches: 'My searches'
   help:
     questions:
       search: 'How i supposed to search a car?'
