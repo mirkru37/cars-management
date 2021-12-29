@@ -5,21 +5,20 @@ module Input
     class << self
       def log_in
         email, password = Input::General.param([Models::Inputable.new('email'),
-                                                Models::Inputable.new('password')], message: nil)
+                                                Models::Inputable.new('password')])
         Models::User.new(email.value, password.value)
       end
 
       # @return [Models::User]
       def sign_up(database)
-        email = create_email.value # nil if invalid
-        if !email.nil? && Validation::User.exist?(email, database)
-          puts Style::Text.call(I18n.t('errors.user_exist'), Style::TEXT_STYLES[:error])
-          email = nil # return
-          # return sign_up(database)
-        end
+        email = valid_email.value
         return if email.nil?
 
-        password = create_password.value # nil if invalid
+        if Validation::User.exist?(email, database)
+          puts Style::Text.call(I18n.t('errors.user_exist'), Style::TEXT_STYLES[:error])
+          return
+        end
+        password = valid_password.value
         return if password.nil?
 
         Models::User.new(email, password)
@@ -27,15 +26,15 @@ module Input
 
       private
 
-      def create_email
+      def valid_email
         Input::General.param([Models::Inputable.new('email',
-                                                    Validation::User.method(:email))], message: nil).first
+                                                    Validation::User.method(:email))]).first
       end
 
       # @return [Array<Inputable>]
-      def create_password
+      def valid_password
         Input::General.param([Models::Inputable.new('password',
-                                                    Validation::User.method(:password))], message: nil).first
+                                                    Validation::User.method(:password))]).first
       end
     end
   end

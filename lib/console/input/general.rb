@@ -15,7 +15,7 @@ module Input
       # @param [Array<Inputable>] parameters
       # @param [String] message
       # @return [Inputable]
-      def param(parameters, message: I18n.t('input.input_request'))
+      def param(parameters, message: nil)
         puts Style::Text.call(message, Style::TEXT_STYLES[:input]) if message
         parameters.each do |param|
           print_attr_name(param)

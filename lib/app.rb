@@ -30,7 +30,7 @@ class App
   end
 
   def main_menu
-    @user.nil? ? map_menu(main_menu_unauthorized) : map_menu(main_menu_authorized)
+    user.nil? ? map_menu(main_menu_unauthorized) : map_menu(main_menu_authorized)
   end
 
   def user=(value)

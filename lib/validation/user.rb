@@ -21,11 +21,9 @@ module Validation
       # @param [String] value
       # @return [String, nil]
       def email(value)
-        # return nil if value.chomp.empty? # option to skip field
         begin
           General.handle_regexp(value, EMAIL_REGEXP)
         rescue ArgumentError
-          # raise ArgumentError, I18n.t('validation.email') # if we want user input again
           puts Style::Text.call(I18n.t('validation.email'), Style::TEXT_STYLES[:error])
           return nil
         end
@@ -46,11 +44,9 @@ module Validation
       # @param [String] value
       # @return [Password, nil]
       def password(value)
-        # return nil if value.chomp.empty? # option to skip field
         begin
           General.handle_regexp(value, PASSWORD_REGEXP)
         rescue ArgumentError
-          # raise ArgumentError, I18n.t('validation.password') # if we want user input again
           puts Style::Text.call(I18n.t('validation.password'), Style::TEXT_STYLES[:error])
           return nil
         end

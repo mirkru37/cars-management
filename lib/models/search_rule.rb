@@ -22,13 +22,6 @@ module Models
                      validation_parameters: { max_price: max_price, min_price: min_price })
     end
 
-    # @param [String] name
-    # @param [Method] validation_method
-    # @param [Hash] validation_parameters
-    def initialize(name, validation_method: nil, validation_parameters: {})
-      super(name, validation_method, **validation_parameters)
-    end
-
     # @param [String] new_val
     def value=(new_val)
       super(new_val)
