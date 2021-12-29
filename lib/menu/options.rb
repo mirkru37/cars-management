@@ -56,7 +56,7 @@ module Menu
             user = nil
           end
         end
-        user.hash_pass
+        user.password = '' if user
         app.user = user
         Output::Menu.main(app: app)
       end

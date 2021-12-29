@@ -11,10 +11,6 @@ module Models
       @password = password
     end
 
-    def hash_pass
-      @password = BCrypt::Password.create(@password)
-    end
-
     # @param [Database] database
     def exist?(database)
       users = database.load('users', [Models::User, BCrypt::Password])
