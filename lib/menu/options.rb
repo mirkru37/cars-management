@@ -51,11 +51,12 @@ module Menu
       def log_in(app:, user: nil)
         if user.nil?
           user = Input::User.log_in
-          unless Validation::User.match?(user, app.database)
+          unless user.match?(app.database)
             puts Style::Text.call(I18n.t('errors.user_invalid'), Style::TEXT_STYLES[:error])
             user = nil
           end
         end
+        user.hash_pass
         app.user = user
         Output::Menu.main(app: app)
       end

@@ -9,15 +9,6 @@ module Validation
     # rubocop:enable Layout/LineLength
 
     class << self
-      # @param [String] email
-      # @param [Database] database
-      def exist?(email, database)
-        users = database.load('users', [Models::User, BCrypt::Password])
-        users.any? do |user|
-          user.email == email
-        end
-      end
-
       # @param [String] value
       # @return [String, nil]
       def email(value)
@@ -28,17 +19,6 @@ module Validation
           return nil
         end
         value.downcase
-      end
-
-      # @param [Models::User] user
-      # @param [Database] database
-      def match?(user, database)
-        pass = user.password
-        user.hash_pass
-        users = database.load('users', [Models::User, BCrypt::Password])
-        users.any? do |db_user|
-          db_user.email == user.email && db_user.password == pass
-        end
       end
 
       # @param [String] value

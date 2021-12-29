@@ -11,17 +11,18 @@ module Input
 
       # @return [Models::User]
       def sign_up(database)
-        email = valid_email.value
+        user = Models::User.new
+        user.email = valid_email.value
         return if email.nil?
 
-        if Validation::User.exist?(email, database)
+        if user.exist?(database)
           puts Style::Text.call(I18n.t('errors.user_exist'), Style::TEXT_STYLES[:error])
           return
         end
-        password = valid_password.value
-        return if password.nil?
+        user.password = valid_password.value
+        return if user.password.nil?
 
-        Models::User.new(email, password)
+        user
       end
 
       private
