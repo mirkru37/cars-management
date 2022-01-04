@@ -58,11 +58,12 @@ module Menu
       def log_in(app:, user: nil)
         if user.nil?
           user = Input::User.log_in
-          unless Validation::User.match?(user, app.database)
+          unless user.match?(app.database)
             puts Style::Text.call(I18n.t('errors.user_invalid'), Style::TEXT_STYLES[:error])
             user = nil
           end
         end
+        user.password = '' if user
         app.user = user
         Output::Menu.main(app: app)
       end
@@ -75,21 +76,26 @@ module Menu
 
       private
 
-      # @param [Array<Hash>] all_searches
-      # @param [Hash] user_searches
-      # @param [Search] search
-      # @param [String] email
-      # def add_user_search(all_searches, user_searches, search, email)
-      #   search = search.to_hash.except('request_quantity')
-      #   if user_searches.nil?
-      #     all_searches << {
-      #       'email' => email,
-      #       'searches' => [search]
-      #     }
-      #   else
-      #     user_searches['searches'] << search
-      #   end
-      # end
+      # @param [Array<String>] questions
+      def config_help_table(questions)
+        table = Terminal::Table.new do |t|
+          t.title = Style::Text.call(I18n.t('headers.help'), Style::TEXT_STYLES[:header])
+        end
+        table.rows = questions.map do |question|
+          [Style::Text.call(I18n.t("help.questions.#{question}"), Style::TEXT_STYLES[:highlight]),
+           Style::Text.call(I18n.t("help.answers.#{question}"), Style::TEXT_STYLES[:hint])]
+        end
+        app.user = user
+        Output::Menu.main(app: app)
+      end
+
+      def log_out(app:)
+        puts Style::Text.call(I18n.t('success.log_out'), Style::TEXT_STYLES[:important])
+        app.user = nil
+        Output::Menu.main(app: app)
+      end
+
+      private
 
       # @param [App] app
       # @param [Array<SearchRule>] rules
