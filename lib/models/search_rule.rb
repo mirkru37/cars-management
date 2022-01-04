@@ -21,7 +21,7 @@ module Models
                      validation_method: Validation::SearchRule.method(:price),
                      validation_parameters: { max_price: max_price, min_price: min_price })
     end
-    
+
     # @param [String] new_val
     def value=(new_val)
       super(new_val)

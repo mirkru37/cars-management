@@ -76,27 +76,6 @@ module Menu
 
       private
 
-      # @param [Array<String>] questions
-      def config_help_table(questions)
-        table = Terminal::Table.new do |t|
-          t.title = Style::Text.call(I18n.t('headers.help'), Style::TEXT_STYLES[:header])
-        end
-        table.rows = questions.map do |question|
-          [Style::Text.call(I18n.t("help.questions.#{question}"), Style::TEXT_STYLES[:highlight]),
-           Style::Text.call(I18n.t("help.answers.#{question}"), Style::TEXT_STYLES[:hint])]
-        end
-        app.user = user
-        Output::Menu.main(app: app)
-      end
-
-      def log_out(app:)
-        puts Style::Text.call(I18n.t('success.log_out'), Style::TEXT_STYLES[:important])
-        app.user = nil
-        Output::Menu.main(app: app)
-      end
-
-      private
-
       # @param [App] app
       # @param [Array<SearchRule>] rules
       # @param [String] sort_by

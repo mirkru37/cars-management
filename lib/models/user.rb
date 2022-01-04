@@ -10,7 +10,7 @@ module Models
       @email = email
       @password = password
     end
-    
+
     # @param [Database] database
     def exist?(database)
       users = database.load('users', [Models::User, BCrypt::Password])
