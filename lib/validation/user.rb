@@ -3,10 +3,9 @@
 module Validation
   class User
     include BCrypt
-    # rubocop:disable Layout/LineLength
-    EMAIL_REGEXP = /\A[\w!#$%&'*+\-\/=?^_`{|}~]{5,}+@[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+\z/i
+    EMAIL_REGEXP = /\A[\w!#$%&'*+\-\/=?^_`{|}~]{5,}+
+                      @[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+\z/xi
     PASSWORD_REGEXP = /\A(?=.*[A-Z]+)(?=(.*\W){2,}).{8,20}\z/
-    # rubocop:enable Layout/LineLength
 
     class << self
       # @param [String] value
