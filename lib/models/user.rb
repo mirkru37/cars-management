@@ -21,10 +21,9 @@ module Models
 
     # @param [Database] database
     def match?(database)
-      pass = password
       users = database.load('users', [Models::User, BCrypt::Password])
       users.any? do |db_user|
-        db_user.email == email && db_user.password == pass
+        db_user.email == email && db_user.password == password
       end
     end
   end

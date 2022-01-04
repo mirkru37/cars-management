@@ -13,7 +13,7 @@ module Input
       def sign_up(database)
         user = Models::User.new
         user.email = valid_email.value
-        return if email.nil?
+        return if user.email.nil?
 
         if user.exist?(database)
           puts Style::Text.call(I18n.t('errors.user_exist'), Style::TEXT_STYLES[:error])
