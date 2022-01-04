@@ -4,7 +4,7 @@ module Output
   class Menu
     class << self
       def main(app:)
-        show(App.main_menu, app: app)
+        show(app.main_menu, app: app)
       end
 
       # @param [Array<MenuItem>] items
@@ -29,7 +29,7 @@ module Output
            Style::Text.call(I18n.t("menu.#{item.title}"), Style::TEXT_STYLES[:hint])]
         end
         table = Terminal::Table.new title:
-                                      Style::Text.call(title, Style::TEXT_STYLES[:title])
+                                      Style::Text.call(I18n.t("titles.#{title}"), Style::TEXT_STYLES[:title])
         table.rows = rows
         Style::Table.config_general(table)
         table

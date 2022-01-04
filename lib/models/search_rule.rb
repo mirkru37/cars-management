@@ -22,18 +22,9 @@ module Models
                      validation_parameters: { max_price: max_price, min_price: min_price })
     end
 
-    # @param [String] name
-    # @param [Method] validation_method
-    # @param [Hash] validation_parameters
-    def initialize(name, validation_method: nil, validation_parameters: {})
-      @validation_method = validation_method
-      @validation_parameters = validation_parameters
-      super(name)
-    end
-
     # @param [String] new_val
     def value=(new_val)
-      super @validation_method.nil? ? new_val : @validation_method.call(new_val, **@validation_parameters)
+      super(new_val)
       @value.capitalize! if @value.instance_of?(String)
     end
 

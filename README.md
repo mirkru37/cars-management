@@ -16,15 +16,17 @@ ruby index.rb
 After the start of the application, you need to choose menu option, of your choice.
 
 ```
-x=========================x
-|        Main menu        |
-x===x=====================x
-| 1 | Search new cars     |
-| 2 | Show available cars |
-| 3 | Help                |
-| 4 | Change language     |
-| 5 | Exit                |
-x===x=====================x
+x=====================x
+|      Main menu      |
+x===x=================x
+| 1 | Search car      |
+| 2 | Show all cars   |
+| 3 | Log in          |
+| 4 | Sign up         |
+| 5 | Help            |
+| 6 | Change language |
+| 7 | Exit            |
+x===x=================x
 ```
 
 ## Search new cars
@@ -105,6 +107,15 @@ Also if you input **wrong** option, the **default** one will be chosen.
 ```
 ## Show available cars
 Here you will be showed a list of all available cars
+
+## Log in
+Log in into account created earlier
+
+## Sign up
+Create an account
+
+### Example
+![Home Page](screenshots/log_in_cast.gif)
 
 ## Help
 Here you can see some hints that could help you to deal

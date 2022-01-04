@@ -16,6 +16,8 @@ en:
     sort_option: 'Sort option'
     total_quantity: 'Cars found'
     request_quantity: 'Request quantity'
+    email: 'Email'
+    password: 'Password'
   titles:
     statistic: 'Statistic'
     result: 'Result'
@@ -50,6 +52,9 @@ en:
     help: 'Help'
     change_language: 'Change language'
     exit: 'Exit'
+    log_in: 'Log in'
+    sign_up: 'Sign up'
+    log_out: 'Log out'
   help:
     questions:
       search: 'How i supposed to search a car?'
@@ -63,3 +68,12 @@ en:
   errors:
     empty_table: 'Table is empty'
     wrong_option: 'Oops, seems like there is no such an option. Try again.'
+    user_invalid: "Oops, invalid email or password."
+    user_exist: 'Oops, user already exist.'
+  welcome_user: 'Welcome %s!!!'
+  success:
+    sign_up: 'Successfully signed up'
+    log_out: 'See you later!'
+  validation:
+    email: 'Email address must be at least 5 characters long and follow email format'
+    password: 'Password must have one capital letter, two special symbols and be from 8 to 20 symbols long'

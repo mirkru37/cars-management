@@ -26,6 +26,17 @@ module Menu
         Output::Menu.main(app: app)
       end
 
+      def sign_up(app:)
+        user = Input::User.sign_up(app.database)
+        if user.nil?
+          Output::Menu.main(app: app)
+        else
+          app.database.append('users', user, [Models::User, BCrypt::Password])
+          puts Style::Text.call(I18n.t('success.sign_up'), Style::TEXT_STYLES[:important])
+          log_in(app: app, user: user)
+        end
+      end
+
       def show_all(app:)
         Output::Search.result(app.cars)
         Output::Menu.main(app: app)
@@ -34,6 +45,25 @@ module Menu
       def help_main(app:)
         table = config_help_table(MAIN_QUESTIONS)
         puts table
+        Output::Menu.main(app: app)
+      end
+
+      def log_in(app:, user: nil)
+        if user.nil?
+          user = Input::User.log_in
+          unless user.match?(app.database)
+            puts Style::Text.call(I18n.t('errors.user_invalid'), Style::TEXT_STYLES[:error])
+            user = nil
+          end
+        end
+        user.password = '' if user
+        app.user = user
+        Output::Menu.main(app: app)
+      end
+
+      def log_out(app:)
+        puts Style::Text.call(I18n.t('success.log_out'), Style::TEXT_STYLES[:important])
+        app.user = nil
         Output::Menu.main(app: app)
       end
 
