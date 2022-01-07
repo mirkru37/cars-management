@@ -28,8 +28,8 @@ namespace :database do
   desc 'Clear database'
   task :clear do
     Dir.glob('db/*.yml') do |file|
-      puts "Deleting: #{file}..."
-      File.delete(file)
+      puts "Clearing: #{file}..."
+      File.write(file, '')
     end
     puts 'Done!'
   end
