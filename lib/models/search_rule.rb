@@ -10,7 +10,7 @@ module Models
     def self.year(name, max_year: DateTime.now.year, min_year: 1800)
       SearchRule.new(name,
                      validation_method: Validation::SearchRule.method(:year),
-                     validation_parameters: { max_year: max_year, min_year: min_year })
+                     **{ max_year: max_year, min_year: min_year })
     end
 
     # @param [String] name
@@ -19,7 +19,7 @@ module Models
     def self.price(name, max_price: Float::MAX, min_price: 0)
       SearchRule.new(name,
                      validation_method: Validation::SearchRule.method(:price),
-                     validation_parameters: { max_price: max_price, min_price: min_price })
+                     **{ max_price: max_price, min_price: min_price })
     end
 
     # @param [String] new_val

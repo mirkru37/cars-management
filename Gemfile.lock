@@ -10,6 +10,7 @@ GEM
       thor (>= 0.18, < 2)
     colorize (0.8.1)
     concurrent-ruby (1.1.9)
+    ffaker (2.20.0)
     i18n (1.8.11)
       concurrent-ruby (~> 1.0)
     lefthook (0.7.7)
@@ -17,6 +18,7 @@ GEM
     parser (3.0.3.1)
       ast (~> 2.4.1)
     rainbow (3.0.0)
+    rake (13.0.6)
     regexp_parser (2.1.1)
     rexml (3.2.5)
     rubocop (1.23.0)
@@ -50,8 +52,10 @@ DEPENDENCIES
   bundler-audit
   bundler-leak
   colorize (~> 0.8.1)
+  ffaker
   i18n (~> 1.8)
   lefthook
+  rake
   rubocop
   rubocop-md
   rubocop-performance
