@@ -5,7 +5,7 @@ module Models
     attr_reader :name, :value
 
     # @param [String] name
-    def initialize(name, validation_method = nil, **validation_parameters)
+    def initialize(name, validation_method: nil, validation_parameters: nil)
       @name = name
       @value = ''
       @validation_method = validation_method
