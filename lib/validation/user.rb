@@ -3,7 +3,7 @@
 module Validation
   class User
     include BCrypt
-    EMAIL_REGEXP = /\A[\w!#$%&'*+\-\/=?^_`{|}~]{5,}+
+    EMAIL_REGEXP = /\A[\w!#$%&'*+.\-\/=?^_`{|}~]{5,}+
                       @[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?(?:\.[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?)+\z/xi
     PASSWORD_REGEXP = /\A(?=.*[A-Z]+)(?=(.*\W){2,}).{8,20}\z/
 
