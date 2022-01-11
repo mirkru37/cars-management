@@ -22,7 +22,7 @@ en:
     statistic: 'Statistic'
     result: 'Result'
     main: 'Main menu'
-    user_searches: 'Searches of %s'
+    user_searches: 'My searches'
   headers:
     field: 'Field'
     information: 'Information'

@@ -22,7 +22,7 @@ uk:
     statistic: 'Статистика'
     result: 'Результат'
     main: 'Головне меню'
-    user_searches: 'Запити %s'
+    user_searches: 'Мої запити'
   headers:
     field: 'Поле'
     information: 'Інформація'

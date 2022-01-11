@@ -6,7 +6,7 @@ module Output
       # @param [Hash] user_searches
       def searches(user_searches)
         searches = user_searches['searches']
-        table = searches.empty? ? Style::Table.empty_table : fill_searches(searches, user_searches['email'])
+        table = searches.empty? ? Style::Table.empty_table : fill_searches(searches)
         Style::Table.config_search_result(table, nil)
         puts table
       end
@@ -14,10 +14,9 @@ module Output
       private
 
       # @param [Array<Hash>] searches
-      # @param [String] email
-      def fill_searches(searches, email)
+      def fill_searches(searches)
         Terminal::Table.new do |table|
-          table.title = Style::Text.call(I18n.t('titles.user_searches') % email, Style::TEXT_STYLES[:title])
+          table.title = Style::Text.call(I18n.t('titles.user_searches'), Style::TEXT_STYLES[:title])
           fill_rows(searches, table)
         end
       end
