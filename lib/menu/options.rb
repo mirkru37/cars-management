@@ -86,6 +86,16 @@ module Menu
         Sorters::Car.sort(result, sort_by: sort_by, sort_order: sort_order)
       end
 
+      # @param [Models::Search] search
+      def store_user_search(search, app)
+        email = app.user.email
+        all_searches = app.database.load('user_searches')
+        user_searches = select_user_searches(email, all_searches)
+        all_searches << user_searches if user_searches['searches'].empty?
+        user_searches['searches'] << search.to_hash.except('request_quantity')
+        app.database.dump('user_searches', all_searches)
+      end
+
       def select_user_searches(email, all_searches)
         user_searches = all_searches.find { |search_| search_['email'] == email }
         if user_searches.nil?
@@ -95,16 +105,6 @@ module Menu
           }
         end
         user_searches
-      end
-
-      # @param [Models::Search] search
-      def store_user_search(search, app)
-        email = app.user.email
-        all_searches = app.database.load('user_searches')
-        user_searches = select_user_searches(email, all_searches)
-        all_searches << user_searches if user_searches['searches'].empty?
-        user_searches['searches'] << search.to_hash.except('request_quantity')
-        app.database.dump('user_searches', all_searches)
       end
 
       # @param [Array<Car>] result
