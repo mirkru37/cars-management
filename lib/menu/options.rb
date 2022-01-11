@@ -98,13 +98,12 @@ module Menu
 
       def select_user_searches(email, all_searches)
         user_searches = all_searches.find { |search_| search_['email'] == email }
-        if user_searches.nil?
-          user_searches = {
-            'email' => email,
-            'searches' => []
-          }
-        end
-        user_searches
+        user_searches.nil? ? new_user_searches : user_searches
+      end
+
+      def new_user_searches
+        { 'email' => email,
+          'searches' => [] }
       end
 
       # @param [Array<Car>] result
