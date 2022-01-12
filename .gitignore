@@ -56,3 +56,4 @@ build-iPhoneSimulator/
 
 # db
 /db/
+!/db/db.yml
