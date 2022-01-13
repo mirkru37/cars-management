@@ -9,7 +9,8 @@ class App
     exit: :close
   }.freeze
   MAIN_MENU_AUTHORIZED_ATTRS = {
-    log_out: :log_out
+    log_out: :log_out,
+    my_searches: :my_searches
   }.freeze
   MAIN_MENU_UNAUTHORIZED_ATTRS = {
     log_in: :log_in,
@@ -17,7 +18,7 @@ class App
   }.freeze
   LOCALES = %w[uk en].freeze
 
-  attr_reader :cars, :database, :searches, :user
+  attr_reader :cars, :database, :searches, :user, :menu_options
 
   def initialize
     I18nConfig.init
@@ -27,6 +28,7 @@ class App
     @searches = Operations::Search.init_searches_array(database.load('searches'))
     puts Style::Text.call(I18n.t('welcome'), Style::TEXT_STYLES[:important])
     @user = nil # initialize current user ( may be loaded from db in future )
+    @menu_options = Menu::Options.new(self)
   end
 
   def main_menu
@@ -51,6 +53,6 @@ class App
 
   # @param [Hash] menu_attrs
   def map_menu(menu_attrs)
-    menu_attrs.map { |item, option| Models::MenuItem.new(item, Menu::Options.method(option)) }
+    menu_attrs.map { |item, option| Models::MenuItem.new(item, menu_options.method(option)) }
   end
 end
