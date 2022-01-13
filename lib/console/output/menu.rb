@@ -4,20 +4,20 @@ module Output
   class Menu
     class << self
       def main(app:)
-        show(app.main_menu, app: app)
+        show(app.main_menu)
       end
 
       # @param [Array<MenuItem>] items
       # @param [String] title
-      def show(items, title: 'main', error_message: I18n.t('errors.wrong_option'), **kwargs)
+      def show(items, title: 'main', error_message: I18n.t('errors.wrong_option'))
         table = config_table(items, title)
         puts table
         option = Input::General.menu_option
         if option.nil? || !option.between?(1, items.length)
           puts Style::Text.call(error_message, Style::TEXT_STYLES[:error])
-          show(items, title: title, error_message: error_message, **kwargs)
+          show(items, title: title, error_message: error_message)
         else
-          items[option - 1].call(**kwargs)
+          items[option - 1].call
         end
       end
 

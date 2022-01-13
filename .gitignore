@@ -55,4 +55,5 @@ build-iPhoneSimulator/
 .rvmrc
 
 # db
-/db/
+db/*
+!db/db.yml

@@ -22,7 +22,7 @@ en:
     statistic: 'Statistic'
     result: 'Result'
     main: 'Main menu'
-    user_searches: 'Searches of %s'
+    user_searches: 'My searches'
   headers:
     field: 'Field'
     information: 'Information'
@@ -77,5 +77,5 @@ en:
     sign_up: 'Successfully signed up'
     log_out: 'See you later!'
   validation:
-    email: 'Email address must be at least 5 characters long and follow email format'
+    email: 'Email address must be at least 5 characters long in main part and follow email format'
     password: 'Password must have one capital letter, two special symbols and be from 8 to 20 symbols long'
