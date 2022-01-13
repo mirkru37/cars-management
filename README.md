@@ -7,6 +7,12 @@ git clone https://github.com/mirkru37/cars-management.git
 cd cars-management
 ```
 
+# Rake
+```bash
+rake -T
+```
+List of rake tasks to manipulate car database
+
 # Run
 ```bash
 ruby index.rb
