@@ -14,7 +14,7 @@ class Database
   # @param [Array<Class>] specify_classes
   def append(table_name, value, specify_classes = [])
     data = load(table_name, specify_classes)
-    data << value
+    data += Array(value)
     dump(table_name, data)
   end
 

@@ -14,11 +14,12 @@ namespace :database do
   task :add_record, [:amount] do |_, args|
     amount = Integer(args.with_defaults(amount: 1)[:amount])
     db = Database.new
+    cars = []
     amount.times do
       id = UUIDTools::UUID.timestamp_create.to_s
-      car = Models::Car.random(id).to_hash
-      db.append('db', car)
+      cars << Models::Car.random(id).to_hash
     end
+    db.append('db', cars)
     puts "Added #{amount} cars."
   end
 
