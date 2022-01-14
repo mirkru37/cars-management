@@ -29,13 +29,13 @@ module Input
 
       def valid_email
         Input::General.param([Models::Inputable.new('email',
-                                                    Validation::User.method(:email))]).first
+                                                    validation_method: Validation::User.method(:email))]).first
       end
 
       # @return [Array<Inputable>]
       def valid_password
         Input::General.param([Models::Inputable.new('password',
-                                                    Validation::User.method(:password))]).first
+                                                    validation_method: Validation::User.method(:password))]).first
       end
     end
   end

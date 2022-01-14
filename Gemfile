@@ -10,9 +10,13 @@ gem 'bundler-leak'
 
 gem 'colorize', '~> 0.8.1'
 
+gem 'ffaker'
+
 gem 'i18n', '~> 1.8'
 
 gem 'lefthook'
+
+gem 'rake'
 
 gem 'rubocop', require: false
 
@@ -23,3 +27,5 @@ gem 'rubocop-performance', require: false
 gem 'rubocop-rake', require: false
 
 gem 'terminal-table', '~> 3.0'
+
+gem 'uuidtools'

@@ -111,7 +111,7 @@ module Menu
     end
 
     def new_user_searches
-      { 'email' => email,
+      { 'email' => app.user.email,
         'searches' => [] }
     end
 

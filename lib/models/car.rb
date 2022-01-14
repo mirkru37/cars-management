@@ -2,8 +2,37 @@
 
 module Models
   class Car
-    DATE_FORMAT = '%d/%m/%y'
+    include Hashify
+
     ATTR_LIST = %w[id make model year odometer price description date_added].freeze
+    DATE_FORMAT = '%d/%m/%y'
+    # values for random generation
+    ODOMETER = (10_000..200_000)
+    PRICE = (1..130)
+    PRICE_MULT = 1000
+    DESCRIPTION_LENGTH = (4..7)
+    MIN_DATE = DateTime.new(2018, 4, 16)
+
+    attr_reader :id
+
+    class << self
+      # @param [String] id
+      def random(id)
+        Car.new('id' => id, **random_attrs)
+      end
+
+      private
+
+      def random_attrs
+        { 'make' => FFaker::Vehicle.make,
+          'model' => FFaker::Vehicle.model,
+          'year' => FFaker::Vehicle.year.to_i,
+          'odometer' => FFaker::Number.rand(ODOMETER),
+          'price' => FFaker::Number.rand(PRICE) * PRICE_MULT,
+          'description' => FFaker::Lorem.sentence(rand(DESCRIPTION_LENGTH)),
+          'date_added' => FFaker::Time.between(MIN_DATE, DateTime.now).strftime(DATE_FORMAT) }
+      end
+    end
 
     def initialize(**kwargs)
       ATTR_LIST.each do |attr|
@@ -36,6 +65,12 @@ module Models
       max_key = attributes_.keys.map { |key| I18n.t("attributes.#{key}").length }.max
       max_value = attributes_.values.map { |value| value.to_s.length }.max
       max_key + max_value
+    end
+
+    def to_hash
+      hash = super
+      hash['date_added'] = hash['date_added'].strftime(DATE_FORMAT)
+      hash
     end
 
     private
