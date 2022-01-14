@@ -13,7 +13,7 @@ require_relative 'lib/operations/car'
 namespace :database do
   desc 'Add one or multiple records'
   task :add_record, [:amount] do |_, args|
-    amount = args.amount.nil? ? 1 : Integer(args.amount)
+    amount = Integer(args.with_defaults(amount: 1)[:amount])
     db = Database.new
     cars = Operations::Car.init_cars_array(db.load('db'))
     id = Operations::CarId.max(cars)
